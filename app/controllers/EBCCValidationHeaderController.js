@@ -90,10 +90,10 @@
 				STATUS_DELIVERY_CODE: req.body.STATUS_DELIVERY_CODE,
 				INSERT_USER: req.body.INSERT_USER,
 				INSERT_TIME: req.body.INSERT_TIME,
-				UPDATE_USER: req.body.UPDATE_USER,
-				UPDATE_TIME: req.body.UPDATE_TIME,
-				DELETE_USER: req.body.DELETE_USER,
-				DELETE_TIME: req.body.DELETE_TIME
+				UPDATE_USER: req.body.UPDATE_USER || "",
+				UPDATE_TIME: req.body.UPDATE_TIME || 0,
+				DELETE_USER: "",
+				DELETE_TIME: 0
 	 		} );
 
 	 		postdata.save()
