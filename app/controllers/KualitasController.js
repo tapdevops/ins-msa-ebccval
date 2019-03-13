@@ -7,10 +7,10 @@
  |
  */
  	// Models
- 	const KualitasModel = require( '../models/KualitasModel.js' );
+ 	const KualitasModel = require( _directory_base + '/app/models/KualitasModel.js' );
 	// Libraries
-	const config = require( '../../config/config.js' );
-	const date = require( '../libraries/date' );
+	const config = require( _directory_base + '/config/config.js' );
+	const date = require( _directory_base + '/app/libraries/date' );
 
 /**
  * Find

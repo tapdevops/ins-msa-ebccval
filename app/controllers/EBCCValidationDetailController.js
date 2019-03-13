@@ -7,11 +7,11 @@
  |
  */
  	// Models
- 	const EBCCValidationDetailModel = require( '../models/EBCCValidationDetailModel.js' );
+ 	const EBCCValidationDetailModel = require( _directory_base + '/app/models/EBCCValidationDetailModel.js' );
 
 	// Libraries
-	const config = require( '../../config/config.js' );
-	const date = require( '../libraries/date' );
+	const config = require( _directory_base + '/config/config.js' );
+	const date = require( _directory_base + '/app/libraries/date' );
 
 	// Modules
 	const validator = require( 'ferds-validator');
@@ -47,6 +47,16 @@
 				"name": "INSERT_TIME",
 				"value": req.body.INSERT_TIME.toString(),
 				"rules": "required|exact_length(14)|numeric"
+			},
+			{
+				"name": "STATUS_SYNC",
+				"value": req.body.STATUS_SYNC,
+				"rules": "required|alpha"
+			},
+			{
+				"name": "SYNC_TIME",
+				"value": req.body.SYNC_TIME.toString(),
+				"rules": "required|exact_length(14)|numeric"
 			}
 		];
 		var run_validator = validator.run( rules );
@@ -60,6 +70,8 @@
 				JUMLAH: req.body.JUMLAH,
 				INSERT_USER: req.body.INSERT_USER || "",
 				INSERT_TIME: req.body.INSERT_TIME || 0,
+				STATUS_SYNC: req.body.STATUS_SYNC || "",
+				SYNC_TIME: req.body.SYNC_TIME || 0,
 				UPDATE_USER: req.body.UPDATE_USER || "",
 				UPDATE_TIME: req.body.UPDATE_TIME || 0,
 				DELETE_USER: "",

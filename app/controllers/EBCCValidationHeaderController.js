@@ -7,11 +7,11 @@
  |
  */
  	// Models
- 	const EBCCValidationHeaderModel = require( '../models/EBCCValidationHeaderModel.js' );
+ 	const EBCCValidationHeaderModel = require( _directory_base + '/app/models/EBCCValidationHeaderModel.js' );
 
 	// Libraries
-	const config = require( '../../config/config.js' );
-	const date = require( '../libraries/date' );
+	const config = require( _directory_base + '/config/config.js' );
+	const date = require( _directory_base + '/app/libraries/date' );
 
 	// Modules
 	const validator = require( 'ferds-validator');
@@ -54,6 +54,16 @@
 				"rules": "required|alpha"
 			},
 			{
+				"name": "LAT_TPH",
+				"value": req.body.LAT_TPH,
+				"rules": "required|latitude"
+			},
+			{
+				"name": "LON_TPH",
+				"value": req.body.LON_TPH,
+				"rules": "required|longitude"
+			},
+			{
 				"name": "DELIVERY_CODE",
 				"value": req.body.DELIVERY_CODE,
 				"rules": "required"
@@ -72,6 +82,16 @@
 				"name": "INSERT_TIME",
 				"value": req.body.INSERT_TIME.toString(),
 				"rules": "required|exact_length(14)|numeric"
+			},
+			{
+				"name": "STATUS_SYNC",
+				"value": req.body.STATUS_SYNC,
+				"rules": "required|alpha"
+			},
+			{
+				"name": "SYNC_TIME",
+				"value": req.body.SYNC_TIME.toString(),
+				"rules": "required|exact_length(14)|numeric"
 			}
 		];
 		var run_validator = validator.run( rules );
@@ -86,10 +106,15 @@
 				BLOCK_CODE: req.body.BLOCK_CODE,
 				NO_TPH: req.body.NO_TPH,
 				STATUS_TPH_SCAN: req.body.STATUS_TPH_SCAN,
+				ALASAN_MANUAL: req.body.ALASAN_MANUAL || "",
+				LAT_TPH: req.body.LAT_TPH,
+				LON_TPH: req.body.LON_TPH,
 				DELIVERY_CODE: req.body.DELIVERY_CODE,
 				STATUS_DELIVERY_CODE: req.body.STATUS_DELIVERY_CODE,
 				INSERT_USER: req.body.INSERT_USER,
 				INSERT_TIME: req.body.INSERT_TIME,
+				STATUS_SYNC: req.body.STATUS_SYNC || "",
+				SYNC_TIME: req.body.SYNC_TIME || 0,
 				UPDATE_USER: req.body.UPDATE_USER || "",
 				UPDATE_TIME: req.body.UPDATE_TIME || 0,
 				DELETE_USER: "",
