@@ -12,10 +12,9 @@
 	const app = express();
 
 	// Config
-	const config = {
-		app : require( './config/config.js' ),
-		database : require( './config/database.js' )['development'],
-	}
+	const config = {};
+		  config.app = require( './config/config.js' );
+		  config.database = require( './config/database.js' )[config.app.env];
 
 /*
 |--------------------------------------------------------------------------
