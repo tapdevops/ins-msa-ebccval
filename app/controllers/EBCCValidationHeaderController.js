@@ -55,12 +55,12 @@
 			},
 			{
 				"name": "LAT_TPH",
-				"value": req.body.LAT_TPH,
+				"value": parseFloat( req.body.LAT_TPH ),
 				"rules": "required|latitude"
 			},
 			{
 				"name": "LON_TPH",
-				"value": req.body.LON_TPH,
+				"value": parseFloat( req.body.LON_TPH ),
 				"rules": "required|longitude"
 			},
 			{
