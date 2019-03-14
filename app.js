@@ -4,7 +4,7 @@
 |--------------------------------------------------------------------------
 */
 	// Node Modules
-	const body_parser = require( 'body-parser' );
+	const bodyParser = require( 'body-parser' );
 	const express = require( 'express' );
 	const mongoose = require( 'mongoose' );
 
@@ -29,10 +29,10 @@
 |--------------------------------------------------------------------------
 */
 	// Parse request of content-type - application/x-www-form-urlencoded
-	app.use( body_parser.urlencoded( { extended: false } ) );
+	app.use( bodyParser.urlencoded( { extended: false } ) );
 
 	// Parse request of content-type - application/json
-	app.use( body_parser.json() );
+	app.use( bodyParser.json() );
 
 	// Setup Database
 	mongoose.Promise = global.Promise;
@@ -47,7 +47,7 @@
 	
 	// Server Running Message
 	app.listen( config.app.port, () => {
-		console.log( 'Server ' + config.app.name + 'Berjalan di port ' + config.app.port );
+		console.log( 'Server ' + config.app.name + ' Berjalan di port ' + config.app.port );
 	} );
 
 	// Routing
