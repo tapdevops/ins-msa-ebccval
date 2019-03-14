@@ -7,21 +7,18 @@
  |
  */
  	// Libraries
- 	const config = require( '../config/config.js' );
+ 	const config = require( _directory_base + '/config/config.js' );
+ 	
  	// Node Modules
 	const jwt = require( 'jsonwebtoken' );
 	const jwtDecode = require( 'jwt-decode' );
 	const nJwt = require( 'njwt' );
 	const uuid = require( 'uuid' );
-	
-/*
- |--------------------------------------------------------------------------
- | Controller
- |--------------------------------------------------------------------------
- */
- 	const EBCCValidationDetailController = require( '../app/controllers/EBCCValidationDetailController.js' );
- 	const EBCCValidationHeaderController = require( '../app/controllers/EBCCValidationHeaderController.js' );
- 	const KualitasController = require( '../app/controllers/KualitasController.js' );
+
+	// Declare Controllers
+ 	const EBCCValidationDetailController = require( _directory_base + '/app/controllers/EBCCValidationDetailController.js' );
+ 	const EBCCValidationHeaderController = require( _directory_base + '/app/controllers/EBCCValidationHeaderController.js' );
+ 	const KualitasController = require( _directory_base + '/app/controllers/KualitasController.js' );
  	
 
 /*
