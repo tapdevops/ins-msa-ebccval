@@ -78,8 +78,6 @@
 				DELETE_TIME: 0
 	 		} );
 
-	 		
-
 	 		postdata.save()
 			.then( data => {
 				if ( !data ) {

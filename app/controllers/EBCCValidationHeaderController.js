@@ -64,16 +64,6 @@
 				"rules": "required|longitude"
 			},
 			{
-				"name": "DELIVERY_CODE",
-				"value": req.body.DELIVERY_CODE,
-				"rules": "required"
-			},
-			{
-				"name": "STATUS_DELIVERY_CODE",
-				"value": req.body.STATUS_DELIVERY_CODE,
-				"rules": "required"
-			},
-			{
 				"name": "INSERT_USER",
 				"value": req.body.INSERT_USER,
 				"rules": "required|alpha_numeric"
