@@ -4,17 +4,12 @@
 |--------------------------------------------------------------------------
 */
 	// Node Modules
-	const bodyParser = require( 'body-parser' );
-	const express = require( 'express' );
-	const mongoose = require( 'mongoose' );
+	const BodyParser = require( 'body-parser' );
+	const Express = require( 'express' );
+	const Mongoose = require( 'mongoose' );
 
 	// Primary Variable
-	const app = express();
-
-	// Config
-	const config = {};
-		  config.app = require( './config/config.js' );
-		  config.database = require( './config/database.js' )[config.app.env];
+	const app = Express();
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +17,10 @@
 |--------------------------------------------------------------------------
 */
 	global._directory_base = __dirname;
+	global._directory_root = '';
+	global.config = {};
+		   config.app = require( _directory_base + '/config/config.js' );
+		   config.database = require( _directory_base + '/config/database.js' )[config.app.env];
 
 /*
 |--------------------------------------------------------------------------
@@ -29,20 +28,20 @@
 |--------------------------------------------------------------------------
 */
 	// Parse request of content-type - application/x-www-form-urlencoded
-	app.use( bodyParser.urlencoded( { extended: false } ) );
+	app.use( BodyParser.urlencoded( { extended: false } ) );
 
 	// Parse request of content-type - application/json
-	app.use( bodyParser.json() );
+	app.use( BodyParser.json() );
 
 	// Setup Database
-	mongoose.Promise = global.Promise;
-	mongoose.connect( config.database.url, {
+	Mongoose.Promise = global.Promise;
+	Mongoose.connect( config.database.url, {
 		useNewUrlParser: true,
 		ssl: config.database.ssl
 	} ).then( () => {
-		console.log( 'Successfully connected to the Database' );
+		console.log( 'Database connected!' );
 	} ).catch( err => {
-		console.log( 'Could not connect to the Database. Exiting application.' )
+		console.log( 'Could not connect to the Database. Exiting application.' );
 	} );
 	
 	// Server Running Message
@@ -56,4 +55,5 @@
 	} );
 
 	require( './routes/route.js' )( app );
+
 	module.exports = app;
