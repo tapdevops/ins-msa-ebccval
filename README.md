@@ -78,6 +78,7 @@ Untuk mengambil seluruh data di TM_KUALITAS. Service ini digunakan untuk pengamb
 Untuk mengambil data pada saat mobile melakukan sinkronisasi.
 
 **Response: (application/json)**
+
 ``` json
 {
 	"status": true,
