@@ -1,5 +1,14 @@
 # Mobile Inspection - Microservice EBCC Validation
 
+Instalasi :
+
+```
+$ cd /go/to/your/project-folder
+$ git init
+$ git clone https://github.com/tapdevops/ins-ms-ebcc-validation.git
+$ git clone https://github.com/tapdevops/ins-ms-ebcc-validation.git
+```
+
 Table of contents:
 
 <!-- TOC depthFrom:1 depthTo:2 withLinks:1 updateOnSave:1 orderedList:0 -->
@@ -26,6 +35,7 @@ Pengaturan dan Konfigurasi:
 |:---------|:-----------|
 | Config | Berisi pengaturan-pengaturan untuk menjalankan program, contohnya seperti jika anda mengganti environment dari `developent` ke `production`, maka database akan ikut berubah. Lokasi file: `APP_PATH/config/config.js` |
 | Database | Berisi kumpulan koneksi Database. Lokasi file: `APP_PATH/config/database.js` |
+| Dockerfile | Berisi konfigurasi untuk membentuk Images pada Docker. Lokasi file: `APP_PATH/config/database.js` |
 
 ## EBCC Kualitas Collections 
 
@@ -249,6 +259,7 @@ Service untuk membuat EBCC Validation Detail.
 ```
 
 ## Documentation History
+
 - Versi 1.0.0 (**2019-03-22**):
 	- Rilis pertama kalinya.
 

@@ -1,6 +1,7 @@
+# Select NodeJS version
 FROM node:8
 
-# Create app directory
+# Select work directory
 WORKDIR /usr/src/app
 
 # Install app dependencies
@@ -8,15 +9,14 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package.json /usr/src/app
 
+# Re-install all packages
 RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
 
 # Bundle app source
 COPY . /usr/src/app
 
-EXPOSE 3011
-CMD [ "node", "app.js" ]
+# Expose to port
+EXPOSE 3014
 
-#RUN npm install
-#RUN node app.js
+# Run NodeJS
+CMD [ "node", "app.js" ]

@@ -19,7 +19,7 @@
 	global._directory_base = __dirname;
 	global._directory_root = '';
 	global.config = {};
-		   config.app = require( _directory_base + '/config/config.js' );
+		   config.app = require( _directory_base + '/config/app.js' );
 		   config.database = require( _directory_base + '/config/database.js' )[config.app.env];
 
 /*
@@ -49,11 +49,7 @@
 		console.log( 'Server ' + config.app.name + ' Berjalan di port ' + config.app.port );
 	} );
 
-	// Routing
-	app.get( '/', ( req, res ) => {
-		res.json( { 'message': config.app.name } )
-	} );
-
-	require( './routes/route.js' )( app );
+	// Routing API
+	require( './routes/api.js' )( app );
 
 	module.exports = app;
