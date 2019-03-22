@@ -1,14 +1,12 @@
 # Mobile Inspection - Microservice EBCC Validation
 
-Daftar Service:
-
 <!-- TOC depthFrom:1 depthTo:2 withLinks:1 updateOnSave:1 orderedList:0 -->
+- [Mobile Inspection - Microservice EBCC Validation](#mobile-inspection---microservice-ebcc-validation)
+	- [EBCC Kualitas Collections](#ebcc-kualitas-collections-ebcckualitas)
 	- [EBCC Kualitas Collections](#ebcc-kualitas-collections-ebcckualitas)
 <!-- /TOC -->
 
-## EBCC Kualitas Collections
-
-Resources: `[/ebcc/kualitas]`
+## EBCC Kualitas Collections [/ebcc/kualitas]
 
 ### Create Or Update [POST] 
 
