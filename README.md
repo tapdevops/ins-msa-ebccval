@@ -3,7 +3,8 @@
 <!-- TOC depthFrom:1 depthTo:2 withLinks:1 updateOnSave:1 orderedList:0 -->
 - [Mobile Inspection - Microservice EBCC Validation](#mobile-inspection---microservice-ebcc-validation)
 	- [EBCC Kualitas Collections](#ebcc-kualitas-collections)
-	- [EBCC Kualitas Collections](#ebcc-kualitas-collections)
+		- [Create Or Update [POST] [/ebcc/kualitas]](#create-or-update-post-ebcckualitas)
+		- [Find [GET] [/ebcc/kualitas]](#find-get-ebcckualitas)
 <!-- /TOC -->
 
 ## EBCC Kualitas Collections 
