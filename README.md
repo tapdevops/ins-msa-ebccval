@@ -8,6 +8,7 @@ Table of contents:
 	- [EBCC Sync Mobile Collections](#ebcc-sync-mobile-collections)
 	- [EBCC Sync TAP Collections](#ebcc-sync-tap-collections)
 	- [EBCC Validation Collections](#ebcc-validation-collections)
+	- [Documentation History](#documentation-history)
 <!-- /TOC -->
 
 Seluruh penggunaan API menggunakan header sebagai berikut :
@@ -246,3 +247,12 @@ Service untuk membuat EBCC Validation Detail.
 	"data": {}
 }
 ```
+
+## Documentation History
+- Versi 1.0.0 :
+	- A
+	- B
+- Versi 1.1.0 :
+	- A
+	- B
+
