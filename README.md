@@ -8,7 +8,7 @@
 
 ## EBCC Kualitas Collections 
 
-### Create Or Update [POST][/ebcc/kualitas]
+### Create Or Update [POST] [/ebcc/kualitas]
 
 Untuk membuat data TM_KUALITAS jika belum terbentuk, dan mengupdate data jika sudah ada.
 
@@ -25,3 +25,47 @@ Untuk membuat data TM_KUALITAS jika belum terbentuk, dan mengupdate data jika su
 	"SHORT_NAME": "SF"
 }
 ```
+
+**Response**
+
+``` json
+{
+	"status": true,
+	"message": "Success! ",
+	"data": {}
+}
+```
+
+### Find [GET] [/ebcc/kualitas]
+
+Untuk mengambil seluruh data di TM_KUALITAS. Service ini digunakan untuk pengambilan data saat pertama kali sync dan report.
+
+**Response: (application/json)**
+
+``` json
+{
+    "status": true,
+    "message": "Success!",
+    "data": [
+        {
+            "ID_KUALITAS": "10",
+            "NAMA_KUALITAS": "Alas Brondolan(TPH)",
+            "UOM": "TPH",
+            "GROUP_KUALITAS": "PENALTY DI TPH",
+            "ACTIVE_STATUS": "YES",
+            "PENALTY_STATUS": "Y",
+            "SHORT_NAME": "AB"
+        },
+        {
+            "ID_KUALITAS": "14",
+            "NAMA_KUALITAS": "Buah Matahari",
+            "UOM": "PKK",
+            "GROUP_KUALITAS": "PENALTY MANDOR",
+            "ACTIVE_STATUS": "YES",
+            "PENALTY_STATUS": "Y",
+            "SHORT_NAME": "SF"
+        }
+    ]
+}
+```
+
