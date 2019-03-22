@@ -8,7 +8,7 @@
 
 Untuk membuat data TM_KUALITAS jika belum terbentuk, dan mengupdate data jika sudah ada.
 
-+ Request (application/json)
+``` json
 	{
 		"ID_KUALITAS": "14",
 		"NAMA_KUALITAS": "Buah Matahari",
@@ -18,4 +18,4 @@ Untuk membuat data TM_KUALITAS jika belum terbentuk, dan mengupdate data jika su
 		"PENALTY_STATUS": "Y",
 		"SHORT_NAME": "SF"
 	}
-
+```
