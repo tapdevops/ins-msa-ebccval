@@ -19,7 +19,7 @@ Seluruh penggunaan API menggunakan header sebagai berikut :
 }
 ```
 
-Konfigurasi:
+Pengaturan dan Konfigurasi:
 
 | Resource | Decription |
 |:---------|:-----------|
