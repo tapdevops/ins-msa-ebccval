@@ -8,11 +8,20 @@ Table of contents:
 	- [EBCC Sync Mobile Collections](#ebcc-sync-mobile-collections)
 <!-- /TOC -->
 
+Seluruh penggunaan API menggunakan header sebagai berikut :
+``` json
+{
+	"Authorization": "Bearer ACC3SS_T0k3N",
+	"Content-Type": "application/json",
+	"accept-version": "1.0.0"
+}
+```
+
 ## EBCC Kualitas Collections 
 
-### Create Or Update [POST] [/ebcc/kualitas]
+### Create [POST] [/ebcc/kualitas]
 
-Untuk membuat data TM_KUALITAS jika belum terbentuk, dan mengupdate data jika sudah ada.
+Untuk membuat data TM_KUALITAS baru.
 
 **Request: (application/json)**
 
@@ -126,5 +135,105 @@ Untuk mengambil data pada saat mobile melakukan sinkronisasi.
 			}
 		]
 	}
+}
+```
+
+## EBCC Sync TAP
+
+### Create Or Update [POST] [/sync-tap/kualitas]
+
+Digunakan untuk mengisi tabel TM_KUALITAS, service ini dijalankan dengan **Cronjob**, berfungsi untuk sinkronisasi TM_KUALITAS di Database TAP ke Database Cloud MongoDB.
+
+**Request: (application/json)**
+
+``` json
+{
+	"ID_KUALITAS": "14",
+	"NAMA_KUALITAS": "Buah Matahari",
+	"UOM": "PKS",
+	"GROUP_KUALITAS": "PENALTY MANDOR",
+	"ACTIVE_STATUS": "YES",
+	"PENALTY_STATUS": "Y",
+	"SHORT_NAME": "SCF"
+}
+```
+
+**Response**
+
+``` json
+{
+	"status": true,
+	"message": "Success! ",
+	"data": {}
+}
+```
+
+## EBCC Validation
+
+### Create Header [POST] [/ebcc/validation/header]
+
+Service untuk membuat EBCC Validation Header.
+
+**Request: (application/json)**
+
+``` json
+{
+	"EBCC_VALIDATION_CODE": "V0000002A0F00101",
+	"WERKS": "4121",
+	"AFD_CODE": "A",
+	"BLOCK_CODE": "001",
+	"NO_TPH": "1",
+	"STATUS_TPH_SCAN": "AUTOMATIC",
+	"ALASAN_MANUAL": "1",
+	"LAT_TPH": "14.593999",
+	"LON_TPH": "120.99426",
+	"DELIVERY_CODE": "ABC",
+	"STATUS_DELIVERY_CODE": "YES",
+	"STATUS_SYNC": "SYNC",
+	"SYNC_TIME": 20190101000000,
+	"INSERT_USER": "0017",
+	"INSERT_TIME": 20190101000000,
+	"UPDATE_USER": "",
+	"UPDATE_TIME": 0
+}
+```
+
+**Response**
+
+``` json
+{
+	"status": true,
+	"message": "Success! ",
+	"data": {}
+}
+```
+
+### Create Detail [POST] [/ebcc/validation/detail]
+
+Service untuk membuat EBCC Validation Detail.
+
+**Request: (application/json)**
+
+``` json
+{
+	"EBCC_VALIDATION_CODE": "V0000002A0F00101",
+	"ID_KUALITAS": "200",
+	"JUMLAH": 20,
+	"STATUS_SYNC": "SYNC",
+	"SYNC_TIME": 20190101000000,
+	"INSERT_USER": "0017",
+	"INSERT_TIME": 20190101000000,
+	"UPDATE_USER": "",
+	"UPDATE_TIME": 0
+}
+```
+
+**Response**
+
+``` json
+{
+	"status": true,
+	"message": "Success! ",
+	"data": {}
 }
 ```
