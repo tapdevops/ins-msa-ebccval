@@ -6,6 +6,8 @@ Table of contents:
 - [Mobile Inspection - Microservice EBCC Validation](#mobile-inspection---microservice-ebcc-validation)
 	- [EBCC Kualitas Collections](#ebcc-kualitas-collections)
 	- [EBCC Sync Mobile Collections](#ebcc-sync-mobile-collections)
+	- [EBCC Sync TAP Collections](#ebcc-sync-tap-collections)
+	- [EBCC Validation Collections](#ebcc-validation-collections)
 <!-- /TOC -->
 
 Seluruh penggunaan API menggunakan header sebagai berikut :
@@ -138,7 +140,7 @@ Untuk mengambil data pada saat mobile melakukan sinkronisasi.
 }
 ```
 
-## EBCC Sync TAP
+## EBCC Sync TAP Collections
 
 ### Create Or Update [POST] [/sync-tap/kualitas]
 
@@ -168,7 +170,7 @@ Digunakan untuk mengisi tabel TM_KUALITAS, service ini dijalankan dengan **Cronj
 }
 ```
 
-## EBCC Validation
+## EBCC Validation Collections
 
 ### Create Header [POST] [/ebcc/validation/header]
 
