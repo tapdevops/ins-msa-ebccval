@@ -8,7 +8,7 @@
 
 ## EBCC Kualitas Collections
 
-`[/ebcc/kualitas]`
+Resources: `[/ebcc/kualitas]`
 
 ### Create Or Update [POST] 
 
