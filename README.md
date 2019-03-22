@@ -1,5 +1,7 @@
 # Mobile Inspection - Microservice EBCC Validation
 
+Table of contents:
+
 <!-- TOC depthFrom:1 depthTo:2 withLinks:1 updateOnSave:1 orderedList:0 -->
 - [Mobile Inspection - Microservice EBCC Validation](#mobile-inspection---microservice-ebcc-validation)
 	- [EBCC Kualitas Collections](#ebcc-kualitas-collections)
@@ -45,28 +47,83 @@ Untuk mengambil seluruh data di TM_KUALITAS. Service ini digunakan untuk pengamb
 
 ``` json
 {
-    "status": true,
-    "message": "Success!",
-    "data": [
-        {
-            "ID_KUALITAS": "10",
-            "NAMA_KUALITAS": "Alas Brondolan(TPH)",
-            "UOM": "TPH",
-            "GROUP_KUALITAS": "PENALTY DI TPH",
-            "ACTIVE_STATUS": "YES",
-            "PENALTY_STATUS": "Y",
-            "SHORT_NAME": "AB"
-        },
-        {
-            "ID_KUALITAS": "14",
-            "NAMA_KUALITAS": "Buah Matahari",
-            "UOM": "PKK",
-            "GROUP_KUALITAS": "PENALTY MANDOR",
-            "ACTIVE_STATUS": "YES",
-            "PENALTY_STATUS": "Y",
-            "SHORT_NAME": "SF"
-        }
-    ]
+	"status": true,
+	"message": "Success!",
+	"data": [
+		{
+			"ID_KUALITAS": "10",
+			"NAMA_KUALITAS": "Alas Brondolan(TPH)",
+			"UOM": "TPH",
+			"GROUP_KUALITAS": "PENALTY DI TPH",
+			"ACTIVE_STATUS": "YES",
+			"PENALTY_STATUS": "Y",
+			"SHORT_NAME": "AB"
+		},
+		{
+			"ID_KUALITAS": "14",
+			"NAMA_KUALITAS": "Buah Matahari",
+			"UOM": "PKK",
+			"GROUP_KUALITAS": "PENALTY MANDOR",
+			"ACTIVE_STATUS": "YES",
+			"PENALTY_STATUS": "Y",
+			"SHORT_NAME": "SF"
+		}
+	]
 }
 ```
 
+## EBCC Sync Mobile Collections 
+
+### Get Data Mobile Sync [POST] [/sync-mobile/kualitas/{date1}/{date2}]
+
+Untuk mengambil data pada saat mobile melakukan sinkronisasi.
+
+**Response: (application/json)**
+
+{
+	"status": true,
+	"message": "Data Sync tanggal 2019-01-01 s/d 2019-01-02",
+	"data": {
+		"hapus": [],
+		"simpan": [
+			{
+				"ID_KUALITAS": "10",
+				"NAMA_KUALITAS": "Alas Brondolan(TPH)",
+				"UOM": "TPH",
+				"GROUP_KUALITAS": "PENALTY DI TPH",
+				"ACTIVE_STATUS": "YES",
+				"PENALTY_STATUS": "Y",
+				"SHORT_NAME": "AB"
+			},
+			{
+				"ID_KUALITAS": "14",
+				"NAMA_KUALITAS": "Buah Matahari",
+				"UOM": "PKK",
+				"GROUP_KUALITAS": "PENALTY MANDOR",
+				"ACTIVE_STATUS": "YES",
+				"PENALTY_STATUS": "Y",
+				"SHORT_NAME": "SF"
+			}
+		],
+		"ubah": [
+			{
+				"ID_KUALITAS": "10",
+				"NAMA_KUALITAS": "Alas Brondolan(TPH)",
+				"UOM": "TPH",
+				"GROUP_KUALITAS": "PENALTY DI TPH",
+				"ACTIVE_STATUS": "YES",
+				"PENALTY_STATUS": "Y",
+				"SHORT_NAME": "AB"
+			},
+			{
+				"ID_KUALITAS": "14",
+				"NAMA_KUALITAS": "Buah Matahari",
+				"UOM": "PKK",
+				"GROUP_KUALITAS": "PENALTY MANDOR",
+				"ACTIVE_STATUS": "YES",
+				"PENALTY_STATUS": "Y",
+				"SHORT_NAME": "SF"
+			}
+		]
+	}
+}
