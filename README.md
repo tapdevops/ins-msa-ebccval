@@ -2,13 +2,13 @@
 
 <!-- TOC depthFrom:1 depthTo:2 withLinks:1 updateOnSave:1 orderedList:0 -->
 - [Mobile Inspection - Microservice EBCC Validation](#mobile-inspection---microservice-ebcc-validation)
-	- [EBCC Kualitas Collections](#ebcc-kualitas-collections-ebcckualitas)
-	- [EBCC Kualitas Collections](#ebcc-kualitas-collections-ebcckualitas)
+	- [EBCC Kualitas Collections](#ebcc-kualitas-collections)
+	- [EBCC Kualitas Collections](#ebcc-kualitas-collections)
 <!-- /TOC -->
 
-## EBCC Kualitas Collections [/ebcc/kualitas]
+## EBCC Kualitas Collections 
 
-### Create Or Update [POST] 
+### Create Or Update [POST][/ebcc/kualitas]
 
 Untuk membuat data TM_KUALITAS jika belum terbentuk, dan mengupdate data jika sudah ada.
 
