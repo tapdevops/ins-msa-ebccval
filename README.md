@@ -249,10 +249,6 @@ Service untuk membuat EBCC Validation Detail.
 ```
 
 ## Documentation History
-- Versi 1.0.0 :
-	- A
-	- B
-- Versi 1.1.0 :
-	- A
-	- B
+- Versi 1.0.0 (**2019-03-22**):
+	- Rilis pertama kalinya.
 
