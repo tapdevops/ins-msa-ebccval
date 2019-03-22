@@ -5,8 +5,7 @@ Table of contents:
 <!-- TOC depthFrom:1 depthTo:2 withLinks:1 updateOnSave:1 orderedList:0 -->
 - [Mobile Inspection - Microservice EBCC Validation](#mobile-inspection---microservice-ebcc-validation)
 	- [EBCC Kualitas Collections](#ebcc-kualitas-collections)
-		- [Create Or Update [POST] [/ebcc/kualitas]](#create-or-update-post-ebcckualitas)
-		- [Find [GET] [/ebcc/kualitas]](#find-get-ebcckualitas)
+	- [EBCC Sync Mobile Collections](#ebcc-sync-mobile-collections)
 <!-- /TOC -->
 
 ## EBCC Kualitas Collections 
@@ -79,7 +78,7 @@ Untuk mengambil seluruh data di TM_KUALITAS. Service ini digunakan untuk pengamb
 Untuk mengambil data pada saat mobile melakukan sinkronisasi.
 
 **Response: (application/json)**
-
+``` json
 {
 	"status": true,
 	"message": "Data Sync tanggal 2019-01-01 s/d 2019-01-02",
@@ -127,3 +126,4 @@ Untuk mengambil data pada saat mobile melakukan sinkronisasi.
 		]
 	}
 }
+```
