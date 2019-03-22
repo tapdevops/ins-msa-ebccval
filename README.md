@@ -2,9 +2,15 @@
 
 ## Daftar API Service
 
-### EBCC Kualitas Collections [/ebcc/kualitas]
+<!-- TOC depthFrom:1 depthTo:2 withLinks:1 updateOnSave:1 orderedList:0 -->
+	- [EBCC Kualitas Collections](#ebcc-kualitas-collections-ebcckualitas)
+<!-- /TOC -->
 
-#### Create Or Update [POST] 
+## EBCC Kualitas Collections
+
+`[/ebcc/kualitas]`
+
+### Create Or Update [POST] 
 
 Untuk membuat data TM_KUALITAS jika belum terbentuk, dan mengupdate data jika sudah ada.
 
