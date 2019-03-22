@@ -19,6 +19,13 @@ Seluruh penggunaan API menggunakan header sebagai berikut :
 }
 ```
 
+Konfigurasi:
+
+| Resource | Decription |
+|:---------|:-----------|
+| Config | Berisi pengaturan-pengaturan untuk menjalankan program, contohnya seperti jika anda mengganti environment dari `developent` ke `production`, maka database akan ikut berubah. Lokasi file: `APP_PATH/config/config.js` |
+| Database | Berisi kumpulan koneksi Database. Lokasi file: `APP_PATH/config/database.js` |
+
 ## EBCC Kualitas Collections 
 
 ### Create [POST] [/ebcc/kualitas]
