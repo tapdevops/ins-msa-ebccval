@@ -81,6 +81,7 @@
 			app.get( '/sync-mobile/kualitas/:start_date/:end_date', verify_token, routes_versioning( {
 				"1.0.0": Controllers.v1.Kualitas.sync_mobile_v_1_0
 			} ) );
+			
 	}
 
 /*
