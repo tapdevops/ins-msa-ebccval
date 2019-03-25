@@ -33,8 +33,8 @@
 		    }
 		]);
 		res.json( {
-			message: "OK",
-			auth: req.auth,
-			query: query
+			status: true,
+			message: "Success!",
+			data: query
 		} );
 	}
