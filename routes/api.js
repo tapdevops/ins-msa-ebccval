@@ -3,13 +3,10 @@
  | Setup
  |--------------------------------------------------------------------------
  */
-	// Libraries
- 	const config = require( _directory_base + '/config/app.js' );
-
 	// Node Modules
  	const NJWT = require( 'njwt' );
 	const JWTDecode = require( 'jwt-decode' );
-	const routes_versioning = require( 'express-routes-versioning' )();
+	const RoutesVersioning = require( 'express-routes-versioning' )();
 
 	// Controllers
 	const Controllers = {
@@ -19,7 +16,6 @@
 			Kualitas: require( _directory_base + '/app/controllers/v1/KualitasController.js' )
 		}
 	}
- 	
 /*
  |--------------------------------------------------------------------------
  | Routing
@@ -47,8 +43,7 @@
 		 | EBCC Validation Detail
 		 |--------------------------------------------------------------------------
 		 */
-			//app.post( '/ebcc/validation/detail', verify_token, EBCCValidationDetailController.create );
-			app.post( '/ebcc/validation/detail', verify_token, routes_versioning( {
+			app.post( '/ebcc/validation/detail', verify_token, RoutesVersioning( {
 				"1.0.0": Controllers.v1.EBCCValidationDetail.create_v_1_0
 			} ) );
 
@@ -57,7 +52,7 @@
 		 | EBCC Validation Header
 		 |--------------------------------------------------------------------------
 		 */
-		 	app.post( '/ebcc/validation/header', verify_token, routes_versioning( {
+		 	app.post( '/ebcc/validation/header', verify_token, RoutesVersioning( {
 				"1.0.0": Controllers.v1.EBCCValidationHeader.create_v_1_0
 			} ) );
 
@@ -66,19 +61,19 @@
 		 | Kualitas
 		 |--------------------------------------------------------------------------
 		 */
-			app.get( '/ebcc/kualitas', verify_token, routes_versioning( {
+			app.get( '/ebcc/kualitas', verify_token, RoutesVersioning( {
 				"1.0.0": Controllers.v1.Kualitas.find_v_1_0
 			} ) );
 
-			app.post( '/ebcc/kualitas', verify_token, routes_versioning( {
+			app.post( '/ebcc/kualitas', verify_token, RoutesVersioning( {
 				"1.0.0": Controllers.v1.Kualitas.create_v_1_0
 			} ) );
 
-			app.post( '/sync-tap/kualitas', verify_token, routes_versioning( {
+			app.post( '/sync-tap/kualitas', verify_token, RoutesVersioning( {
 				"1.0.0": Controllers.v1.Kualitas.create_or_update_v_1_0
 			} ) );
 
-			app.get( '/sync-mobile/kualitas/:start_date/:end_date', verify_token, routes_versioning( {
+			app.get( '/sync-mobile/kualitas/:start_date/:end_date', verify_token, RoutesVersioning( {
 				"1.0.0": Controllers.v1.Kualitas.sync_mobile_v_1_0
 			} ) );
 			
@@ -95,7 +90,8 @@
 			const bearer = bearer_header.split( ' ' );
 			const bearer_token = bearer[1];
 			req.token = bearer_token;
-			NJWT.verify( bearer_token, config.secret_key, config.token_algorithm, ( err, authData ) => {
+			
+			NJWT.verify( bearer_token, config.app.secret_key, config.app.token_algorithm, ( err, authData ) => {
 				if ( err ) {
 					res.send({
 						status: false,
@@ -103,12 +99,10 @@
 						data: []
 					} );
 				}
-				else {
-					req.auth = JWTDecode( req.token );
-					req.auth.LOCATION_CODE_GROUP = req.auth.LOCATION_CODE.split( ',' );
-					req.config = config;
-					next();
-				}
+				req.auth = JWTDecode( req.token );
+				req.auth.LOCATION_CODE_GROUP = req.auth.LOCATION_CODE.split( ',' );
+				req.config = config;
+				next();
 			} );
 		}
 		else {

@@ -93,6 +93,8 @@
 		 		var auth = req.auth;
 		 		var postdata = new EBCCValidationHeaderModel( {
 		 			EBCC_VALIDATION_CODE: req.body.EBCC_VALIDATION_CODE,
+					WERKS_AFD_CODE: req.body.WERKS + req.body.AFD_CODE,
+					WERKS_AFD_BLOCK_CODE: req.body.WERKS + req.body.AFD_CODE + req.body.BLOCK_CODE,
 					WERKS: req.body.WERKS,
 					AFD_CODE: req.body.AFD_CODE,
 					BLOCK_CODE: req.body.BLOCK_CODE,
