@@ -12,6 +12,8 @@
  */
 	const EBCCValidationHeaderSchema = mongoose.Schema( {
 		EBCC_VALIDATION_CODE: String,
+		WERKS_AFD_CODE: String,
+		WERKS_AFD_BLOCK_CODE: String,
 		WERKS: String,
 		AFD_CODE: String,
 		BLOCK_CODE: String,

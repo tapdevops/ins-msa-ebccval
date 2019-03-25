@@ -13,7 +13,8 @@
 		v1: {
 			EBCCValidationDetail: require( _directory_base + '/app/controllers/v1/EBCCValidationDetailController.js' ),
 			EBCCValidationHeader: require( _directory_base + '/app/controllers/v1/EBCCValidationHeaderController.js' ),
-			Kualitas: require( _directory_base + '/app/controllers/v1/KualitasController.js' )
+			Kualitas: require( _directory_base + '/app/controllers/v1/KualitasController.js' ),
+			Report: require( _directory_base + '/app/controllers/v1/ReportController.js' )
 		}
 	}
 /*
@@ -76,7 +77,15 @@
 			app.get( '/sync-mobile/kualitas/:start_date/:end_date', verify_token, RoutesVersioning( {
 				"1.0.0": Controllers.v1.Kualitas.sync_mobile_v_1_0
 			} ) );
-			
+
+		/*
+		 |--------------------------------------------------------------------------
+		 | Report
+		 |--------------------------------------------------------------------------
+		 */
+			app.get( '/report/web/per-baris', verify_token, RoutesVersioning( {
+				"1.0.0": Controllers.v1.Report.web_report_per_baris_v_1_0
+			} ) );
 	}
 
 /*
