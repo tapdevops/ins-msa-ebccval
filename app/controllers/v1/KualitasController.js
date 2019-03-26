@@ -179,9 +179,14 @@
 	  * --------------------------------------------------------------------
 	*/
 		exports.find_v_1_0 = async ( req, res ) => {
-			var query = await KualitasModel.find( {
-					DELETE_TIME: 0
-				} )
+			var url_query = req.query;
+			var query = {};
+			if ( Object.keys( url_query ).length > 0 ) {
+				query = url_query;
+				query.DELETE_TIME = 0
+			}
+
+			var query = await KualitasModel.find( query )
 				.select( {
 					_id: 0,
 					ID_KUALITAS: 1,
@@ -199,6 +204,7 @@
 				data: query
 			});
 		};
+
 	/** 
  	  * Sync Mobile
 	  * @desc Untuk memberikan data pada mobile berdasarkan tanggal sync.
