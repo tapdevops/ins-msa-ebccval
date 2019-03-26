@@ -83,7 +83,7 @@
 		 | Report
 		 |--------------------------------------------------------------------------
 		 */
-			app.get( '/report/web/per-baris', verify_token, RoutesVersioning( {
+			app.get( '/report/web/per-baris/:werks_afd_block_code/:start_date/:end_date', verify_token, RoutesVersioning( {
 				"1.0.0": Controllers.v1.Report.web_report_per_baris_v_1_0
 			} ) );
 	}
