@@ -22,13 +22,15 @@
 		   config.app = require( _directory_base + '/config/app.js' );
 		   config.database = require( _directory_base + '/config/database.js' )[config.app.env];
 
+		  
+
 /*
 |--------------------------------------------------------------------------
 | APP Init
 |--------------------------------------------------------------------------
 */
 	// Parse request of content-type - application/x-www-form-urlencoded
-	app.use( BodyParser.urlencoded( { extended: false } ) );
+	app.use( BodyParser.urlencoded( { pextended: false } ) );
 
 	// Parse request of content-type - application/json
 	app.use( BodyParser.json() );
