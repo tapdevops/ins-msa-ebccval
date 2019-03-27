@@ -36,6 +36,7 @@
 	app.use( BodyParser.json() );
 
 	// Setup Database
+	console.log(config.database.url)
 	Mongoose.Promise = global.Promise;
 	Mongoose.connect( config.database.url, {
 		useNewUrlParser: true,
