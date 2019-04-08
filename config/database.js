@@ -9,7 +9,7 @@
 			ssl: false
 		},
 		development: {
-			url: 'mongodb://dbapp:dbapp123@149.129.252.112:27017/s_ebcc_validation?authSource=admin',
+			url: 'mongodb://s_ebcc_validation:s_ebcc_validation@dbappdev.tap-agri.com:4848/s_ebcc_validation?authSource=s_ebcc_validation',
 			ssl: false
 		}
 	}
