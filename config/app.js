@@ -12,7 +12,7 @@
 		*/
 			port: process.env.PORT || 3014,
 			name: 'Microservice EBCC Validation',
-			env: 'development', // production, qa, development
+			env: 'production', // production, qa, development
 
 		/*
 		|--------------------------------------------------------------------------
