@@ -7,8 +7,8 @@
  |
  */
  	// Models
-	const EBCCValidationHeaderModel = require( _directory_base + '/app/models/EBCCValidationHeaderModel.js' );
-	const EBCCValidationDetailModel = require( _directory_base + '/app/models/EBCCValidationDetailModel.js' );
+	const EBCCValidationHeaderModel = require( _directory_base + '/app/models/v1.0/EBCCValidationHeaderModel.js' );
+	const EBCCValidationDetailModel = require( _directory_base + '/app/models/v1.0/EBCCValidationDetailModel.js' );
 
 	// Modules
 	const Validator = require( 'ferds-validator');

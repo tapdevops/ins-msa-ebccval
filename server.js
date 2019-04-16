@@ -1,28 +1,25 @@
 /*
 |--------------------------------------------------------------------------
-| APP Setup
-|--------------------------------------------------------------------------
-*/
-	// Node Modules
-	const BodyParser = require( 'body-parser' );
-	const Express = require( 'express' );
-	const Mongoose = require( 'mongoose' );
-
-	// Primary Variable
-	const app = Express();
-
-/*
-|--------------------------------------------------------------------------
 | Global APP Init
 |--------------------------------------------------------------------------
 */
 	global._directory_base = __dirname;
-	global._directory_root = '';
 	global.config = {};
-		   config.app = require( _directory_base + '/config/app.js' );
-		   config.database = require( _directory_base + '/config/database.js' )[config.app.env];
+		  config.app = require( './config/app.js' );
+		  config.database = require( './config/database.js' )[config.app.env];
 
-		  
+/*
+|--------------------------------------------------------------------------
+| APP Setup
+|--------------------------------------------------------------------------
+*/
+	// Node Modules
+	const bodyParser = require( 'body-parser' );
+	const express = require( 'express' );
+	const mongoose = require( 'mongoose' );
+
+	// Primary Variable
+	const app = express();
 
 /*
 |--------------------------------------------------------------------------
@@ -30,29 +27,27 @@
 |--------------------------------------------------------------------------
 */
 	// Parse request of content-type - application/x-www-form-urlencoded
-	app.use( BodyParser.urlencoded( { pextended: false } ) );
+	app.use( bodyParser.urlencoded( { extended: false } ) );
 
 	// Parse request of content-type - application/json
-	app.use( BodyParser.json() );
+	app.use( bodyParser.json() );
 
 	// Setup Database
-	console.log(config.database.url)
-	Mongoose.Promise = global.Promise;
-	Mongoose.connect( config.database.url, {
+	mongoose.Promise = global.Promise;
+	mongoose.connect( config.database.url, {
 		useNewUrlParser: true,
 		ssl: config.database.ssl
 	} ).then( () => {
-		console.log( 'Database connected!' );
+		console.log( 'Successfully connected to the Database (' + config.database.url + ')' );
 	} ).catch( err => {
-		console.log( 'Could not connect to the Database. Exiting application.' );
+		console.log( 'Could not connect to the Database. Exiting application.' )
 	} );
-	
+
 	// Server Running Message
 	app.listen( config.app.port, () => {
 		console.log( 'Server ' + config.app.name + ' Berjalan di port ' + config.app.port );
 	} );
 
-	// Routing API
+	// Routing
 	require( './routes/api.js' )( app );
-
 	module.exports = app;

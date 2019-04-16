@@ -7,10 +7,10 @@
  |
  */
  	// Models
- 	const KualitasModel = require( _directory_base + '/app/models/KualitasModel.js' );
+ 	const KualitasModel = require( _directory_base + '/app/models/v1.0/KualitasModel.js' );
 
  	// Libraries
- 	const Date = require( _directory_base + '/app/libraries/Date.js' )
+ 	const HelperLib = require( _directory_base + '/app/libraries/v1.0/HelperLib.js' )
 
 /*
  |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@
 				PENALTY_STATUS: req.body.PENALTY_STATUS,
 				SHORT_NAME: req.body.SHORT_NAME,
 				INSERT_USER: "SYSTEM",
-				INSERT_TIME: Date.convert( 'now', 'YYYYMMDDhhmmss' ),
+				INSERT_TIME: HelperLib.date_format( 'now', 'YYYYMMDDhhmmss' ),
 				UPDATE_USER: "",
 				UPDATE_TIME: 0,
 				DELETE_USER: "",
@@ -88,7 +88,7 @@
 
 				if ( !data ) {
 					post.INSERT_USER = "SYSTEM";
-					post.INSERT_TIME = Date.convert( 'now', 'YYYYMMDDhhmmss' );
+					post.INSERT_TIME = HelperLib.date_format( 'now', 'YYYYMMDDhhmmss' );
 					post.UPDATE_USER = "";
 					post.UPDATE_TIME = 0;
 					post.DELETE_USER = "";
@@ -128,7 +128,7 @@
 						"SHORT_NAME" != req.body.SHORT_NAME
 					) {
 						post.UPDATE_USER = "SYSTEM";
-						post.UPDATE_TIME = Date.convert( 'now', 'YYYYMMDDhhmmss' );
+						post.UPDATE_TIME = HelperLib.date_format( 'now', 'YYYYMMDDhhmmss' );
 
 						KualitasModel.findOneAndUpdate( { 
 							ID_KUALITAS: req.body.ID_KUALITAS
@@ -297,7 +297,7 @@
 				
 				res.json({
 					status: true,
-					message: 'Data Sync tanggal ' + Date.convert( req.params.start_date, 'YYYY-MM-DD' ) + ' s/d ' + Date.convert( req.params.end_date, 'YYYY-MM-DD' ),
+					message: 'Data Sync tanggal ' + HelperLib.date_format( req.params.start_date, 'YYYY-MM-DD' ) + ' s/d ' + HelperLib.date_format( req.params.end_date, 'YYYY-MM-DD' ),
 					data: {
 						"hapus": temp_delete,
 						"simpan": temp_insert,

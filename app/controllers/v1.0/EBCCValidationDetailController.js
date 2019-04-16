@@ -7,7 +7,7 @@
  |
  */
  	// Models
- 	const EBCCValidationDetailModel = require( _directory_base + '/app/models/EBCCValidationDetailModel.js' );
+ 	const EBCCValidationDetailModel = require( _directory_base + '/app/models/v1.0/EBCCValidationDetailModel.js' );
 
 	// Modules
 	const validator = require( 'ferds-validator');
@@ -23,7 +23,7 @@
 	  * @return json
 	  * --------------------------------------------------------------------
 	*/
-	 	exports.create_v_1_0 = ( req, res ) => {
+	 	exports.create = ( req, res ) => {
 	 		var rules = [
 	 			{
 					"name": "EBCC_VALIDATION_CODE",
