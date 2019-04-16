@@ -11,10 +11,11 @@
 	// Controllers
 	const Controllers = {
 		v_1_0: {
-			EBCCValidationDetail: require( _directory_base + '/app/controllers/v1.0/EBCCValidationDetailController.js' ),
-			EBCCValidationHeader: require( _directory_base + '/app/controllers/v1.0/EBCCValidationHeaderController.js' ),
-			Kualitas: require( _directory_base + '/app/controllers/v1.0/KualitasController.js' ),
-			Report: require( _directory_base + '/app/controllers/v1.0/ReportController.js' )
+			EBCCValidationDetail: require( _directory_base + '/app/v1.0/Http/Controllers/EBCCValidationDetailController.js' ),
+			EBCCValidationHeader: require( _directory_base + '/app/v1.0/Http/Controllers/EBCCValidationHeaderController.js' ),
+			Kualitas: require( _directory_base + '/app/v1.0/Http/Controllers/KualitasController.js' ),
+			Report: require( _directory_base + '/app/v1.0/Http/Controllers/ReportController.js' ),
+			SyncMobile: require( _directory_base + '/app/v1.0/Http/Controllers/SyncMobileController.js' )
 		}
 	}
 /*
@@ -66,16 +67,17 @@
 				"1.0.0": Controllers.v_1_0.Kualitas.find_v_1_0
 			} ) );
 
-			app.post( '/ebcc/kualitas', verifyToken, RoutesVersioning( {
-				"1.0.0": Controllers.v_1_0.Kualitas.create_v_1_0
-			} ) );
-
 			app.post( '/sync-tap/kualitas', verifyToken, RoutesVersioning( {
 				"1.0.0": Controllers.v_1_0.Kualitas.create_or_update_v_1_0
 			} ) );
 
+		/*
+		 |--------------------------------------------------------------------------
+		 | Kualitas Sync Mobile
+		 |--------------------------------------------------------------------------
+		 */
 			app.get( '/sync-mobile/kualitas/:start_date/:end_date', verifyToken, RoutesVersioning( {
-				"1.0.0": Controllers.v_1_0.Kualitas.sync_mobile_v_1_0
+				"1.0.0": Controllers.v_1_0.SyncMobile.synchronize
 			} ) );
 
 		/*

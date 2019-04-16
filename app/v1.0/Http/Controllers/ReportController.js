@@ -7,15 +7,15 @@
  |
  */
  	// Models
-	const EBCCValidationHeaderModel = require( _directory_base + '/app/models/v1.0/EBCCValidationHeaderModel.js' );
-	const EBCCValidationDetailModel = require( _directory_base + '/app/models/v1.0/EBCCValidationDetailModel.js' );
+	const EBCCValidationHeaderModel = require( _directory_base + '/app/v1.0/Http/Models/EBCCValidationHeaderModel.js' );
+	const EBCCValidationDetailModel = require( _directory_base + '/app/v1.0/Http/Models/EBCCValidationDetailModel.js' );
 
 	// Modules
 	const Validator = require( 'ferds-validator');
 
 /*
  |--------------------------------------------------------------------------
- | Versi 1.0.0
+ | Versi 1.0
  |--------------------------------------------------------------------------
  */
  	/** 
@@ -27,7 +27,7 @@
 	exports.web_report_per_baris_v_1_0 = async ( req, res ) => {
 		var start_date = parseInt( req.params.start_date + "000000" );
 		var end_date = parseInt( req.params.end_date + "235959" );
-		var query = await EBCCValidationHeaderModel.aggregate([
+		var query = await EBCCValidationHeaderModel.aggregate( [
 			{
 				"$lookup": {
 					"from": "TR_D_EBCC_VALIDATION",
@@ -49,7 +49,8 @@
 					]
 				}
 			}
-		]);
+		] );
+		
 		res.json( {
 			status: true,
 			message: "Success!",

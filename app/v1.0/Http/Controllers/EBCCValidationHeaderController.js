@@ -7,10 +7,10 @@
  |
  */
  	// Models
- 	const EBCCValidationDetailModel = require( _directory_base + '/app/models/v1.0/EBCCValidationDetailModel.js' );
+ 	const EBCCValidationHeaderModel = require( _directory_base + '/app/v1.0/Http/Models/EBCCValidationHeaderModel.js' );
 
 	// Modules
-	const validator = require( 'ferds-validator');
+	const Validator = require( 'ferds-validator');
 
 /*
  |--------------------------------------------------------------------------
@@ -23,7 +23,7 @@
 	  * @return json
 	  * --------------------------------------------------------------------
 	*/
-	 	exports.create = ( req, res ) => {
+	 	exports.create_v_1_0 = ( req, res ) => {
 	 		var rules = [
 	 			{
 					"name": "EBCC_VALIDATION_CODE",
@@ -31,14 +31,39 @@
 					"rules": "required|alpha_numeric"
 				},
 				{
-					"name": "ID_KUALITAS",
-					"value": req.body.ID_KUALITAS,
+					"name": "WERKS",
+					"value": req.body.WERKS,
 					"rules": "required|numeric"
 				},
 				{
-					"name": "JUMLAH",
-					"value": req.body.JUMLAH.toString(),
-					"rules": "required|numeric"
+					"name": "AFD_CODE",
+					"value": req.body.AFD_CODE,
+					"rules": "required|alpha_numeric"
+				},
+				{
+					"name": "BLOCK_CODE",
+					"value": req.body.BLOCK_CODE,
+					"rules": "required|alpha_numeric"
+				},
+				{
+					"name": "NO_TPH",
+					"value": req.body.NO_TPH,
+					"rules": "required|alpha_numeric"
+				},
+				{
+					"name": "STATUS_TPH_SCAN",
+					"value": req.body.STATUS_TPH_SCAN,
+					"rules": "required|alpha"
+				},
+				{
+					"name": "LAT_TPH",
+					"value": parseFloat( req.body.LAT_TPH ),
+					"rules": "required|latitude"
+				},
+				{
+					"name": "LON_TPH",
+					"value": parseFloat( req.body.LON_TPH ),
+					"rules": "required|longitude"
 				},
 				{
 					"name": "INSERT_USER",
@@ -61,17 +86,27 @@
 					"rules": "required|exact_length(14)|numeric"
 				}
 			];
-			var run_validator = validator.run( rules );
+			var run_validator = Validator.run( rules );
 			console.log( run_validator.error_lists );
 
 			if ( run_validator.status == true ) {
 		 		var auth = req.auth;
-		 		var postdata = new EBCCValidationDetailModel( {
+		 		var postdata = new EBCCValidationHeaderModel( {
 		 			EBCC_VALIDATION_CODE: req.body.EBCC_VALIDATION_CODE,
-					ID_KUALITAS: req.body.ID_KUALITAS,
-					JUMLAH: req.body.JUMLAH,
-					INSERT_USER: req.body.INSERT_USER || "",
-					INSERT_TIME: req.body.INSERT_TIME || 0,
+					WERKS_AFD_CODE: req.body.WERKS + req.body.AFD_CODE,
+					WERKS_AFD_BLOCK_CODE: req.body.WERKS + req.body.AFD_CODE + req.body.BLOCK_CODE,
+					WERKS: req.body.WERKS,
+					AFD_CODE: req.body.AFD_CODE,
+					BLOCK_CODE: req.body.BLOCK_CODE,
+					NO_TPH: req.body.NO_TPH,
+					STATUS_TPH_SCAN: req.body.STATUS_TPH_SCAN,
+					ALASAN_MANUAL: req.body.ALASAN_MANUAL || "",
+					LAT_TPH: req.body.LAT_TPH,
+					LON_TPH: req.body.LON_TPH,
+					DELIVERY_CODE: req.body.DELIVERY_CODE,
+					STATUS_DELIVERY_CODE: req.body.STATUS_DELIVERY_CODE,
+					INSERT_USER: req.body.INSERT_USER,
+					INSERT_TIME: req.body.INSERT_TIME,
 					STATUS_SYNC: req.body.STATUS_SYNC || "",
 					SYNC_TIME: req.body.SYNC_TIME || 0,
 					UPDATE_USER: req.body.UPDATE_USER || "",
