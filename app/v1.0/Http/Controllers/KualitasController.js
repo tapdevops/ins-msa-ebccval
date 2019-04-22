@@ -23,7 +23,7 @@
 	  * @return json
 	  * --------------------------------------------------------------------
 	*/
-		exports.create_or_update_v_1_0 = ( req, res ) => {
+		exports.create_or_update = ( req, res ) => {
 
 	 		var post = {
 	 			ID_KUALITAS: req.body.ID_KUALITAS,
@@ -131,7 +131,7 @@
 	  * @return json
 	  * --------------------------------------------------------------------
 	*/
-		exports.find_v_1_0 = async ( req, res ) => {
+		exports.find = async ( req, res ) => {
 			var url_query = req.query;
 			var query = {};
 			if ( Object.keys( url_query ).length > 0 ) {

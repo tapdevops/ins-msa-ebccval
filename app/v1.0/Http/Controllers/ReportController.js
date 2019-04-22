@@ -24,7 +24,7 @@
 	  * @return json
 	  * --------------------------------------------------------------------
 	*/
-	exports.web_report_per_baris_v_1_0 = async ( req, res ) => {
+	exports.web_report_per_baris = async ( req, res ) => {
 		var start_date = parseInt( req.params.start_date + "000000" );
 		var end_date = parseInt( req.params.end_date + "235959" );
 		var query = await EBCCValidationHeaderModel.aggregate( [

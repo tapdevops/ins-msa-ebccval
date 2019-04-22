@@ -4,8 +4,6 @@
  |--------------------------------------------------------------------------
  */
 	// Node Modules
- 	const NJWT = require( 'njwt' );
-	const JWTDecode = require( 'jwt-decode' );
 	const RoutesVersioning = require( 'express-routes-versioning' )();
 
 	// Controllers
@@ -18,6 +16,14 @@
 			SyncMobile: require( _directory_base + '/app/v1.0/Http/Controllers/SyncMobileController.js' )
 		}
 	}
+
+	// Middleware
+	const Middleware = {
+		v_1_0: {
+			VerifyToken: require( _directory_base + '/app/v1.0/Http/Middleware/VerifyToken.js' )
+		}
+	}
+	
 /*
  |--------------------------------------------------------------------------
  | Routing
@@ -42,84 +48,60 @@
 
 		/*
 		 |--------------------------------------------------------------------------
-		 | EBCC Validation Detail
+		 | API Versi 1.0
 		 |--------------------------------------------------------------------------
 		 */
-			app.post( '/ebcc/validation/detail', verifyToken, RoutesVersioning( {
+			// EBCC Validation Detail
+			app.post( '/api/v1.0/ebcc/validation/detail', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.EBCCValidationDetail.create );
+
+			// EBCC Validation Header
+			app.post( '/api/v1.0/ebcc/validation/header', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.EBCCValidationHeader.create );
+
+			// Kualitas
+			app.get( '/api/v1.0/ebcc/kualitas', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.Kualitas.find );
+
+			// Report
+			app.get( '/api/v1.0/report/web/per-baris/:werks_afd_block_code/:start_date/:end_date', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.Report.web_report_per_baris );
+
+			// Sync Mobile
+			app.get( '/api/v1.0/sync-mobile/kualitas/:start_date/:end_date', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.SyncMobile.synchronize );
+
+			// Sync TAP
+			app.post( '/api/v1.0/sync-tap/kualitas', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.Kualitas.create_or_update );
+
+		/*
+		 |--------------------------------------------------------------------------
+		 | Old API
+		 |--------------------------------------------------------------------------
+		 */
+		 	// EBCC Validation Detail
+		 	app.post( '/ebcc/validation/detail', Middleware.v_1_0.VerifyToken, RoutesVersioning( {
 				"1.0.0": Controllers.v_1_0.EBCCValidationDetail.create
 			} ) );
 
-		/*
-		 |--------------------------------------------------------------------------
-		 | EBCC Validation Header
-		 |--------------------------------------------------------------------------
-		 */
-		 	app.post( '/ebcc/validation/header', verifyToken, RoutesVersioning( {
-				"1.0.0": Controllers.v_1_0.EBCCValidationHeader.create_v_1_0
+		 	// EBCC Validation Header
+		 	app.post( '/ebcc/validation/header', Middleware.v_1_0.VerifyToken, RoutesVersioning( {
+				"1.0.0": Controllers.v_1_0.EBCCValidationHeader.create
 			} ) );
 
-		/*
-		 |--------------------------------------------------------------------------
-		 | Kualitas
-		 |--------------------------------------------------------------------------
-		 */
-			app.get( '/ebcc/kualitas', verifyToken, RoutesVersioning( {
-				"1.0.0": Controllers.v_1_0.Kualitas.find_v_1_0
+			// Kualitas
+			app.get( '/ebcc/kualitas', Middleware.v_1_0.VerifyToken, RoutesVersioning( {
+				"1.0.0": Controllers.v_1_0.Kualitas.find
 			} ) );
 
-			app.post( '/sync-tap/kualitas', verifyToken, RoutesVersioning( {
-				"1.0.0": Controllers.v_1_0.Kualitas.create_or_update_v_1_0
+			// Report
+			app.get( '/report/web/per-baris/:werks_afd_block_code/:start_date/:end_date', Middleware.v_1_0.VerifyToken, RoutesVersioning( {
+				"1.0.0": Controllers.v_1_0.Report.web_report_per_baris
 			} ) );
 
-		/*
-		 |--------------------------------------------------------------------------
-		 | Kualitas Sync Mobile
-		 |--------------------------------------------------------------------------
-		 */
-			app.get( '/sync-mobile/kualitas/:start_date/:end_date', verifyToken, RoutesVersioning( {
+			// Sync Mobile
+			app.get( '/sync-mobile/kualitas/:start_date/:end_date', Middleware.v_1_0.VerifyToken, RoutesVersioning( {
 				"1.0.0": Controllers.v_1_0.SyncMobile.synchronize
 			} ) );
 
-		/*
-		 |--------------------------------------------------------------------------
-		 | Report
-		 |--------------------------------------------------------------------------
-		 */
-			app.get( '/report/web/per-baris/:werks_afd_block_code/:start_date/:end_date', verifyToken, RoutesVersioning( {
-				"1.0.0": Controllers.v_1_0.Report.web_report_per_baris_v_1_0
+			// Sync TAP
+			app.post( '/sync-tap/kualitas', Middleware.v_1_0.VerifyToken, RoutesVersioning( {
+				"1.0.0": Controllers.v_1_0.Kualitas.create_or_update
 			} ) );
-	}
 
-/*
- |--------------------------------------------------------------------------
- | Verify Token
- |--------------------------------------------------------------------------
- */
-	function verifyToken( req, res, next ) {
-		// Get auth header value
-		const bearer_header = req.headers['authorization'];
-		if ( typeof bearer_header !== 'undefined' ) {
-			const bearer = bearer_header.split( ' ' );
-			const bearer_token = bearer[1];
-			req.token = bearer_token;
-			NJWT.verify( bearer_token, config.app.secret_key, config.app.token_algorithm, ( err, authData ) => {
-				if ( err ) {
-					res.send({
-						status: false,
-						message: "Invalid Token",
-						data: []
-					} );
-				}
-				else {
-					req.auth = JWTDecode( req.token );
-					req.auth.LOCATION_CODE_GROUP = req.auth.LOCATION_CODE.split( ',' );
-					req.config = config;
-					next();
-				}
-			} );
-		}
-		else {
-			// Forbidden
-			res.sendStatus( 403 );
-		}
 	}
