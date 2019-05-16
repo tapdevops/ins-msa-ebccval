@@ -39,9 +39,9 @@
 			app.get( '/', ( req, res ) => {
 				res.json( { 
 					application: {
-						name : config.name,
-						port : config.port,
-						environment : config.env
+						name : config.app.name,
+						port : config.app.port,
+						environment : config.app.env
 					} 
 				} )
 			} );
