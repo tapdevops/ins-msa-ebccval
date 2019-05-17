@@ -10,9 +10,14 @@
 		| App Config
 		|--------------------------------------------------------------------------
 		*/
-			port: process.env.PORT || 3014,
+			//port: process.env.PORT || 3014,
 			name: 'Microservice EBCC Validation',
-			env: 'development', // production, qa, development
+			env: 'development', // production, quality_assurance, development,
+			port: {
+				development: process.env.PORT || 4014,
+				quality_assurance: process.env.PORT || 5014,
+				production: process.env.PORT || 3014,
+			},
 
 		/*
 		|--------------------------------------------------------------------------
