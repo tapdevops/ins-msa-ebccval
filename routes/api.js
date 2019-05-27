@@ -11,6 +11,7 @@
 		v_1_0: {
 			EBCCValidationDetail: require( _directory_base + '/app/v1.0/Http/Controllers/EBCCValidationDetailController.js' ),
 			EBCCValidationHeader: require( _directory_base + '/app/v1.0/Http/Controllers/EBCCValidationHeaderController.js' ),
+			Export: require( _directory_base + '/app/v1.0/Http/Controllers/ExportController.js' ),
 			Kualitas: require( _directory_base + '/app/v1.0/Http/Controllers/KualitasController.js' ),
 			Report: require( _directory_base + '/app/v1.0/Http/Controllers/ReportController.js' ),
 			SyncMobile: require( _directory_base + '/app/v1.0/Http/Controllers/SyncMobileController.js' )
@@ -56,6 +57,10 @@
 
 			// EBCC Validation Header
 			app.post( '/api/v1.0/ebcc/validation/header', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.EBCCValidationHeader.create );
+
+			// Export
+			app.get( '/api/v1.0/export/tr-ebcc/:start_date/:end_date', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.Export.tr_ebcc );
+			app.get( '/api/v1.0/export/tr-ebcc-kualitas/:start_date/:end_date', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.Export.tr_ebcc_kualitas );
 
 			// Kualitas
 			app.get( '/api/v1.0/ebcc/kualitas', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.Kualitas.find );

@@ -35,6 +35,7 @@
 				SHORT_NAME: req.body.SHORT_NAME
 	 		};
 
+	 		console.log(post);
 	 		KualitasModel.findOne( { 
 				ID_KUALITAS: req.body.ID_KUALITAS
 			} ).then( data => {

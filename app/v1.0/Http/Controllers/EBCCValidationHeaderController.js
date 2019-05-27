@@ -87,14 +87,11 @@
 				}
 			];
 			var run_validator = Validator.run( rules );
-			console.log( run_validator.error_lists );
-
+			
 			if ( run_validator.status == true ) {
 		 		var auth = req.auth;
 		 		var postdata = new EBCCValidationHeaderModel( {
 		 			EBCC_VALIDATION_CODE: req.body.EBCC_VALIDATION_CODE,
-					WERKS_AFD_CODE: req.body.WERKS + req.body.AFD_CODE,
-					WERKS_AFD_BLOCK_CODE: req.body.WERKS + req.body.AFD_CODE + req.body.BLOCK_CODE,
 					WERKS: req.body.WERKS,
 					AFD_CODE: req.body.AFD_CODE,
 					BLOCK_CODE: req.body.BLOCK_CODE,
@@ -110,9 +107,7 @@
 					STATUS_SYNC: req.body.STATUS_SYNC || "",
 					SYNC_TIME: req.body.SYNC_TIME || 0,
 					UPDATE_USER: req.body.UPDATE_USER || "",
-					UPDATE_TIME: req.body.UPDATE_TIME || 0,
-					DELETE_USER: "",
-					DELETE_TIME: 0
+					UPDATE_TIME: req.body.UPDATE_TIME || 0
 		 		} );
 
 		 		postdata.save()

@@ -75,9 +75,7 @@
 					STATUS_SYNC: req.body.STATUS_SYNC || "",
 					SYNC_TIME: req.body.SYNC_TIME || 0,
 					UPDATE_USER: req.body.UPDATE_USER || "",
-					UPDATE_TIME: req.body.UPDATE_TIME || 0,
-					DELETE_USER: "",
-					DELETE_TIME: 0
+					UPDATE_TIME: req.body.UPDATE_TIME || 0
 		 		} );
 
 		 		postdata.save()

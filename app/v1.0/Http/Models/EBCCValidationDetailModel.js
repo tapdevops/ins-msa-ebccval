@@ -12,7 +12,15 @@
  */
 	const EBCCValidationDetailSchema = mongoose.Schema( {
 		EBCC_VALIDATION_CODE: String,
-		ID_KUALITAS: String,
+		ID_KUALITAS: {
+			type: Number,
+			get: v => Math.floor( v ),
+			set: v => Math.floor( v ),
+			alias: 'i',
+			default: function() {
+				return 0;
+			}
+		},
 		JUMLAH: {
 			type: Number,
 			get: v => Math.floor( v ),
@@ -44,16 +52,6 @@
 		},
 		UPDATE_USER: String,
 		UPDATE_TIME: {
-			type: Number,
-			get: v => Math.floor( v ),
-			set: v => Math.floor( v ),
-			alias: 'i',
-			default: function() {
-				return 0;
-			}
-		},
-		DELETE_USER: String,
-		DELETE_TIME: {
 			type: Number,
 			get: v => Math.floor( v ),
 			set: v => Math.floor( v ),
