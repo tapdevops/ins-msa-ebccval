@@ -66,7 +66,7 @@
 			app.get( '/api/v1.0/ebcc/kualitas', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.Kualitas.find );
 
 			// Report
-			app.get( '/api/v1.0/report/web/per-baris/:werks_afd_block_code/:start_date/:end_date', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.Report.web_report_per_baris );
+			app.get( '/api/v1.0/report/web/per-baris/:werks/:start_date/:end_date', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.Report.web_report_per_baris );
 
 			// Sync Mobile
 			app.get( '/api/v1.0/sync-mobile/kualitas/:start_date/:end_date', Middleware.v_1_0.VerifyToken, Controllers.v_1_0.SyncMobile.synchronize );

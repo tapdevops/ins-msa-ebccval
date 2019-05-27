@@ -27,6 +27,7 @@
 	exports.web_report_per_baris = async ( req, res ) => {
 		var start_date = parseInt( req.params.start_date + "000000" );
 		var end_date = parseInt( req.params.end_date + "235959" );
+		console.log(start_date + ' / ' + end_date );
 		var query = await EBCCValidationHeaderModel.aggregate( [
 			{
 				"$lookup": {
@@ -38,7 +39,7 @@
 			},
 			{
 				"$match": {
-					"WERKS_AFD_BLOCK_CODE": new RegExp( '^' + req.params.werks_afd_block_code ),
+					"WERKS": new RegExp( req.params.werks ),
 					"$and": [
 						{
 							"INSERT_TIME": {
