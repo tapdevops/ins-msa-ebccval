@@ -41,8 +41,9 @@
 				res.json( { 
 					application: {
 						name : config.app.name,
-						port : config.app.port,
-						environment : config.app.env
+						env : config.app.env,
+						port : config.app.port[config.app.env]
+						
 					} 
 				} )
 			} );
