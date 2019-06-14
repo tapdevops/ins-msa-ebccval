@@ -50,21 +50,18 @@
 				{
 					"$match": {
 						"SYNC_TIME": {
-							"$gte": 20190101000000,
-							"$lte": 20190101235959
+							"$gte": parseInt( req.params.start_date ),
+							"$lte": parseInt( req.params.end_date )
 						}
 					}
-				},
-				{
-					"$limit": 5
 				}
 			] );
 
-			res.json({
+			res.status( 200 ).json( {
 				status: true,
 				message: "Success!",
 				data: data
-			})
+			} );
 		};
 	
  	/** 
@@ -82,13 +79,18 @@
 					}
 				},
 				{
-					"$limit": 5
+					"$match": {
+						"SYNC_TIME": {
+							"$gte": parseInt( req.params.start_date ),
+							"$lte": parseInt( req.params.end_date )
+						}
+					}
 				}
 			] );
 
-			res.json({
+			res.status( 200 ).json( {
 				status: true,
 				message: "Success!",
 				data: data
-			})
+			} );
 		};
