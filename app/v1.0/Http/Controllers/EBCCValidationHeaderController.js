@@ -90,7 +90,7 @@
 			
 			if ( run_validator.status == true ) {
 		 		var auth = req.auth;
-		 		var postdata = new EBCCValidationHeaderModel( {
+		 		var body = {
 		 			EBCC_VALIDATION_CODE: req.body.EBCC_VALIDATION_CODE,
 					WERKS: req.body.WERKS,
 					AFD_CODE: req.body.AFD_CODE,
@@ -108,7 +108,8 @@
 					SYNC_TIME: req.body.SYNC_TIME || 0,
 					UPDATE_USER: req.body.UPDATE_USER || "",
 					UPDATE_TIME: req.body.UPDATE_TIME || 0
-		 		} );
+		 		};
+		 		var postdata = new EBCCValidationHeaderModel( body );
 
 		 		postdata.save()
 				.then( data => {
@@ -119,13 +120,14 @@
 							data: {}
 						} );
 					}
-					res.send( {
+
+					return res.send( {
 						status: true,
 						message: "Success!",
 						data: {}
 					} );
 				} ).catch( err => {
-					res.send( {
+					return res.send( {
 						status: false,
 						message: "Error! Data gagal diproses.",
 						data: {}
@@ -133,7 +135,7 @@
 				} );
 			}
 			else {
-				res.send( {
+				return res.send( {
 					status: false,
 					message: "Data gagal diinput, periksa kembali inputan.",
 					data: {}

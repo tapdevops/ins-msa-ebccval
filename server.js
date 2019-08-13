@@ -17,6 +17,9 @@
 	const BodyParser = require( 'body-parser' );
 	const Express = require( 'express' );
 	const Mongoose = require( 'mongoose' );
+	const Libraries = {
+		KafkaServer: require( './app/v1.1/Http/Libraries/KafkaServer.js' )
+	}
 
 	// Primary Variable
 	const App = Express();
@@ -49,6 +52,25 @@
 		console.log( "App Port\t: " + config.app.port[config.app.env] );
 	} );
 
-	// Routing
+/*
+|--------------------------------------------------------------------------
+| Kafka Setup
+|--------------------------------------------------------------------------
+*/
+	// As Kafka Producer
+	// Libraries.KafkaServer.producer( 'KUCING' );
+	Libraries.KafkaServer.consumer();
+
+/*
+|--------------------------------------------------------------------------
+| Request
+|--------------------------------------------------------------------------
+*/
 	require( './routes/api.js' )( App );
+
+/*
+|--------------------------------------------------------------------------
+| Exports
+|--------------------------------------------------------------------------
+*/
 	module.exports = App;
