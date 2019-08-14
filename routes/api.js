@@ -8,6 +8,14 @@
 
 	// Controllers
 	const Controllers = {
+		v_1_1: {
+			EBCCValidationDetail: require( _directory_base + '/app/v1.1/Http/Controllers/EBCCValidationDetailController.js' ),
+			EBCCValidationHeader: require( _directory_base + '/app/v1.1/Http/Controllers/EBCCValidationHeaderController.js' ),
+			Export: require( _directory_base + '/app/v1.1/Http/Controllers/ExportController.js' ),
+			Kualitas: require( _directory_base + '/app/v1.1/Http/Controllers/KualitasController.js' ),
+			Report: require( _directory_base + '/app/v1.1/Http/Controllers/ReportController.js' ),
+			SyncMobile: require( _directory_base + '/app/v1.1/Http/Controllers/SyncMobileController.js' )
+		},
 		v_1_0: {
 			EBCCValidationDetail: require( _directory_base + '/app/v1.0/Http/Controllers/EBCCValidationDetailController.js' ),
 			EBCCValidationHeader: require( _directory_base + '/app/v1.0/Http/Controllers/EBCCValidationHeaderController.js' ),
@@ -20,6 +28,10 @@
 
 	// Middleware
 	const Middleware = {
+		v_1_1: {
+			KafkaServer: require( _directory_base + '/app/v1.1/Http/Middleware/KafkaServer.js' ),
+			VerifyToken: require( _directory_base + '/app/v1.1/Http/Middleware/VerifyToken.js' )
+		},
 		v_1_0: {
 			VerifyToken: require( _directory_base + '/app/v1.0/Http/Middleware/VerifyToken.js' )
 		}
@@ -42,11 +54,41 @@
 					application: {
 						name : config.app.name,
 						env : config.app.env,
-						port : config.app.port[config.app.env]
-						
+						port : config.app.port[config.app.env],
+						version_available: [
+							"1.1",
+							"1.0"
+						]
 					} 
 				} )
 			} );
+
+		/*
+		 |--------------------------------------------------------------------------
+		 | API Versi 1.1
+		 |--------------------------------------------------------------------------
+		 */
+			// EBCC Validation Detail
+			app.post( '/api/v1.1/ebcc/validation/detail', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.EBCCValidationDetail.create );
+
+			// EBCC Validation Header
+			app.post( '/api/v1.1/ebcc/validation/header', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.EBCCValidationHeader.create );
+
+			// Export
+			app.get( '/api/v1.1/export/tr-ebcc/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Export.tr_ebcc );
+			app.get( '/api/v1.1/export/tr-ebcc-kualitas/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Export.tr_ebcc_kualitas );
+
+			// Kualitas
+			app.get( '/api/v1.1/ebcc/kualitas', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Kualitas.find );
+
+			// Report
+			app.get( '/api/v1.1/report/web/per-baris/:werks/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Report.web_report_per_baris );
+
+			// Sync Mobile
+			app.get( '/api/v1.1/sync-mobile/kualitas/:start_date/:end_date', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.SyncMobile.synchronize );
+
+			// Sync TAP
+			app.post( '/api/v1.1/sync-tap/kualitas', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Kualitas.create_or_update );
 
 		/*
 		 |--------------------------------------------------------------------------

@@ -10,13 +10,29 @@
 		| App Config
 		|--------------------------------------------------------------------------
 		*/
-			//port: process.env.PORT || 3014,
 			name: 'Microservice EBCC Validation',
 			env: 'qa', // prod, qa, dev,
 			port: {
 				dev: process.env.PORT || 4014,
 				qa: process.env.PORT || 5014,
 				prod: process.env.PORT || 3014,
+			},
+
+		/*
+		|--------------------------------------------------------------------------
+		| Kafka Config
+		|--------------------------------------------------------------------------
+		*/
+			kafka: {
+				dev: {
+					server_host: '149.129.252.13:9092'
+				},
+				qa: {
+					server_host: '149.129.252.13:9092'
+				},
+				prod: {
+					server_host: '149.129.252.13:9092'
+				}
 			},
 
 		/*
