@@ -48,8 +48,8 @@
  			status: true,
  			message: "OK",
  			data: {
- 				ebcc_query: ebcc_query[0].jumlah,
- 				target: 10 // Masih hardcode
+ 				jumlah: ebcc_query[0].jumlah,
+ 				target: 0 // Masih hardcode
  			}
  		} );
 	};
@@ -61,6 +61,7 @@
 	*/
 	exports.process_weekly = ( req, res ) => {
 
+		// Coding disini, buat fungsi untuk generate data -7
 		var date_now = new Date();
 			date_now = parseInt( MomentTimezone( date_now ).tz( "Asia/Jakarta" ).format( "YYYYMMDD" ) + '235959' );
 		var date_min_1_week = new Date();
