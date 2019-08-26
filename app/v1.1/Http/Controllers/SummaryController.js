@@ -48,7 +48,7 @@
  			status: true,
  			message: "OK",
  			data: {
- 				jumlah: ebcc_query[0].jumlah,
+ 				jumlah: ( ebcc_query.length > 0 ? ebcc_query[0].jumlah : 0 ) ,
  				target: 0 // Masih hardcode
  			}
  		} );
