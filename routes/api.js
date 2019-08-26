@@ -14,7 +14,8 @@
 			Export: require( _directory_base + '/app/v1.1/Http/Controllers/ExportController.js' ),
 			Kualitas: require( _directory_base + '/app/v1.1/Http/Controllers/KualitasController.js' ),
 			Report: require( _directory_base + '/app/v1.1/Http/Controllers/ReportController.js' ),
-			SyncMobile: require( _directory_base + '/app/v1.1/Http/Controllers/SyncMobileController.js' )
+			SyncMobile: require( _directory_base + '/app/v1.1/Http/Controllers/SyncMobileController.js' ),
+			Summary: require( _directory_base + '/app/v1.1/Http/Controllers/SummaryController.js' ),
 		},
 		v_1_0: {
 			EBCCValidationDetail: require( _directory_base + '/app/v1.0/Http/Controllers/EBCCValidationDetailController.js' ),
@@ -81,6 +82,8 @@
 			// Kualitas
 			app.get( '/api/v1.1/ebcc/kualitas', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Kualitas.find );
 
+			app.get( '/api/v1.1/summary', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Summary.ebcc );
+
 			// Report
 			app.get( '/api/v1.1/report/web/per-baris/:werks/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Report.web_report_per_baris );
 
@@ -89,6 +92,11 @@
 
 			// Sync TAP
 			app.post( '/api/v1.1/sync-tap/kualitas', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Kualitas.create_or_update );
+
+			// Summary
+			app.get( '/api/v1.1/summary', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Summary.process_weekly )
+
+
 
 		/*
 		 |--------------------------------------------------------------------------
