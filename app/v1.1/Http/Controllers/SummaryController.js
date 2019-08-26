@@ -33,17 +33,20 @@
  		var ebcc_query = await EBCCValidationHeaderModel.aggregate( [
  			{
  				"$match": {
- 					"INSERT_TIME": {
- 						"$lte": max_date
- 					},
  					"INSERT_USER": req.auth.USER_AUTH_CODE
  				}
  			},
  			{
- 				"$count": "jumlah"
- 			}
+				$sort: {
+					SUMMARY_DATE: -1
+				}
+			},
+			{
+				$limit: 1
+			}
  		] );
-		 if( req.body.IS_VIEW == 1 ){
+
+		if( req.body.IS_VIEW == 1 ){
 			SummaryWeeklyModel.findOneAndUpdate( {
 				INSERT_USER: req.auth.USER_AUTH_CODE,
 				IS_VIEW : 0	
@@ -62,7 +65,7 @@
  			message: "OK",
  			data: {
  				jumlah: ( ebcc_query.length > 0 ? ebcc_query[0].jumlah : 0 ) ,
- 				target: 0 // Masih hardcode
+ 				target: 0
  			}
  		} );
 	};
@@ -81,35 +84,101 @@
 			date_min_1_week = parseInt( MomentTimezone( date_min_1_week ).tz( "Asia/Jakarta" ).format( "YYYYMMDD" ) + '000000' );
 		var max_date = parseInt( MomentTimezone( date_now ).tz( "Asia/Jakarta" ).format( "YYYYMMDD" ) + '235959' );
 		
-		var ebcc_query = await EBCCValidationHeaderModel.aggregate( [
+
+		var query = await EBCCValidationHeaderModel.aggregate( [
 			{
-				"$match": {
-					"INSERT_TIME": {
-						"$lte": max_date
-					},
-					"INSERT_USER": req.auth.USER_AUTH_CODE
+				$match: {
+					INSERT_TIME: {
+						$gte: date_min_1_week,
+						$lte: date_now,
+					}
 				}
 			},
 			{
-				"$count": "jumlah"
+				$group: {
+					_id: {
+						INSERT_USER: "$INSERT_USER"
+					}
+				}
+			},
+			{
+				$project: {
+					_id: 0,
+					USER_AUTH_CODE: "$_id.INSERT_USER"
+				}
 			}
-		] );
+		] ); 
+
+		if( query.length > 0 ) {
+			query.forEach( async function( q ) {
+
+				console.log(q);
+				var ebcc = await EBCCValidationHeaderModel.aggregate( [
+					{
+				        $match: {
+				            INSERT_USER: q.USER_AUTH_CODE,
+				            INSERT_TIME: {
+				                $gte: date_min_1_week,
+				                $lte: date_now
+				            }
+				        }
+				    },
+				    {
+				        $group: {
+				            _id: {
+				                INSERT_USER: "$INSERT_USER"
+				            },
+				            count: {
+				                $sum: 1
+				            }
+				        }
+				    },
+
+				] );
+
+				
+				SummaryWeeklyModel.findOne( {
+					INSERT_USER: q.USER_AUTH_CODE,
+					SUMMARY_DATE: parseInt( date_now.toString().substr( 0, 8 ) )
+				} ).then( dt => {
+					if ( !dt ) {
+						var set = new SummaryWeeklyModel( {
+							"TOTAL_EBCC": ( ebcc.length > 0 ? ebcc[0].count : 0 ),
+							"SUMMARY_DATE": parseInt( date_now.toString().substr( 0, 8 ) ),
+							"IS_VIEW": 0,
+							"INSERT_USER": authCode,
+							"INSERT_TIME": HelperLib.date_format( 'now', 'YYYYMMDDhhmmss' )
+						} );
+						set.save()
+					}
+				} );
+				
+			} );
+		}
+
+		// console.log(query);
+		// var ebcc_query = await EBCCValidationHeaderModel.aggregate( [
+		// 	{
+		// 		"$match": {
+		// 			"INSERT_TIME": {
+		// 				"$gte": date_min_1_week,
+		// 				"$lte": max_date
+		// 			}
+		// 		}
+		// 	}
+		// ] );
+
+		// ebcc_query.forEach( function( ebcc ) {
+
+		// } );
+		/**/
    
-		var set = new SummaryWeeklyModel( {
-			"TOTAL_EBCC": ( ebcc_query.length > 0 ? ebcc_query[0].jumlah : 0 ),
-			"SUMMARY_DATE": parseInt( date_now.toString().substr( 0, 8 ) ),
-			"IS_VIEW": 0,
-			"INSERT_USER": authCode,
-			"INSERT_TIME": HelperLib.date_format( 'now', 'YYYYMMDDhhmmss' )
-		} );
-		console.log( set )
-		set.save()
+		
 		return res.json( {
 			status: true,
 			message: "Success!",
 			data: {
-				date_now: date_now,
-				date_min_1_week: date_min_1_week
 			}
 		} );
+		
 	};
