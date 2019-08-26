@@ -48,9 +48,7 @@
  			status: true,
  			message: "OK",
  			data: {
- 				ebcc_query: ebcc_query,
- 				// complete: ( finding_progress_complete.length > 0 ? finding_progress_complete[0].jumlah : 0 ),
- 				// incomplete: ( finding_progress_incomplete.length > 0 ? finding_progress_incomplete[0].jumlah : 0 ),
+ 				ebcc_query: ebcc_query[0].jumlah,
  				target: 10 // Masih hardcode
  			}
  		} );
