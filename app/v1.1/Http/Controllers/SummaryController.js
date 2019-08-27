@@ -146,7 +146,7 @@
 							"TOTAL_EBCC": ( ebcc.length > 0 ? ebcc[0].count : 0 ),
 							"SUMMARY_DATE": parseInt( date_now.toString().substr( 0, 8 ) ),
 							"IS_VIEW": 0,
-							"INSERT_USER": authCode,
+							"INSERT_USER": q.USER_AUTH_CODE,
 							"INSERT_TIME": HelperLib.date_format( 'now', 'YYYYMMDDhhmmss' )
 						} );
 						set.save()
@@ -155,30 +155,10 @@
 				
 			} );
 		}
-
-		// console.log(query);
-		// var ebcc_query = await EBCCValidationHeaderModel.aggregate( [
-		// 	{
-		// 		"$match": {
-		// 			"INSERT_TIME": {
-		// 				"$gte": date_min_1_week,
-		// 				"$lte": max_date
-		// 			}
-		// 		}
-		// 	}
-		// ] );
-
-		// ebcc_query.forEach( function( ebcc ) {
-
-		// } );
-		/**/
-   
-		
 		return res.json( {
 			status: true,
 			message: "Success!",
-			data: {
-			}
+			data: {}
 		} );
 		
 	};
