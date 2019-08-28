@@ -46,10 +46,6 @@
 			}
  		] );
 
- 		console.log("EBCC Query");
- 		console.log(ebcc_query);
- 		console.log("-------------------------");
-
 		if( req.body.IS_VIEW == 1 ){
 			SummaryWeeklyModel.findOneAndUpdate( {
 				INSERT_USER: req.auth.USER_AUTH_CODE,
@@ -63,6 +59,18 @@
 			} ).then( data => {
 				console.log( data );
 			} )
+		}
+
+		if ( ebcc_query.length == 0 ) {
+			var now = HelperLib.date_format( 'now', 'YYYYMMDDhhmmss' );
+			var set = new SummaryWeeklyModel( {
+				"TOTAL_EBCC": 0,
+				"SUMMARY_DATE": parseInt( now.toString().substr( 0, 8 ) ),
+				"IS_VIEW": 0, 
+				"INSERT_USER": req.auth.USER_AUTH_CODE, // Hardcode
+				"INSERT_TIME": now
+			} );
+			set.save();
 		}
  		return res.status( 200 ).json( {
  			status: ( ebcc_query.length > 0 ? ( ebcc_query[0].IS_VIEW == 1 ? false : true ) : true ),
