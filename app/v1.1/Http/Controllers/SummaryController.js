@@ -65,7 +65,7 @@
 			} )
 		}
  		return res.status( 200 ).json( {
- 			status: ( ebcc_query.length > 0 ? ( ebcc_query[0].IS_VIEW == 1 ? false : true ) : false ),
+ 			status: ( ebcc_query.length > 0 ? ( ebcc_query[0].IS_VIEW == 1 ? false : true ) : true ),
  			message: "OK",
  			data: {
  				jumlah: ( ebcc_query.length > 0 ? ebcc_query[0].TOTAL_EBCC : 0 ),
