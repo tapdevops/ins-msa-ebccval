@@ -30,7 +30,7 @@
  		var date = new Date();
  			date.setDate( date.getDate() - 1 );
  		var max_date = parseInt( MomentTimezone( date ).tz( "Asia/Jakarta" ).format( "YYYYMMDD" ) + '235959' );
- 		var ebcc_query = await EBCCValidationHeaderModel.aggregate( [
+ 		var ebcc_query = await SummaryWeeklyModel.aggregate( [
  			{
  				"$match": {
  					"INSERT_USER": req.auth.USER_AUTH_CODE
@@ -45,6 +45,10 @@
 				$limit: 1
 			}
  		] );
+
+ 		console.log("EBCC Query");
+ 		console.log(ebcc_query);
+ 		console.log("-------------------------");
 
 		if( req.body.IS_VIEW == 1 ){
 			SummaryWeeklyModel.findOneAndUpdate( {
@@ -61,10 +65,10 @@
 			} )
 		}
  		return res.status( 200 ).json( {
- 			status: true,
+ 			status: ( ebcc_query.length > 0 ? ( ebcc_query[0].IS_VIEW == 1 ? false : true ) : false ),
  			message: "OK",
  			data: {
- 				jumlah: ( ebcc_query.length > 0 ? ebcc_query[0].jumlah : 0 ) ,
+ 				jumlah: ( ebcc_query.length > 0 ? ebcc_query[0].TOTAL_EBCC : 0 ),
  				target: 0
  			}
  		} );
@@ -155,6 +159,7 @@
 				
 			} );
 		}
+		
 		return res.json( {
 			status: true,
 			message: "Success!",
