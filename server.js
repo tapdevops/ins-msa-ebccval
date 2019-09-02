@@ -58,8 +58,7 @@
 |--------------------------------------------------------------------------
 */
 	// As Kafka Producer
-	// Libraries.KafkaServer.producer( 'KUCING' );
-	Libraries.KafkaServer.consumer();
+	// Libraries.KafkaServer.consumer();
 
 /*
 |--------------------------------------------------------------------------
