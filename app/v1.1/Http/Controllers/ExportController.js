@@ -22,6 +22,7 @@
 	  * --------------------------------------------------------------------
 	*/
 		exports.tr_ebcc_kualitas = async ( req, res ) => {
+			let type = req.params.type;
 			var data = await EBCCValidationDetailModel.aggregate( [
 				{
 					"$lookup": {
@@ -49,7 +50,7 @@
 				},
 				{
 					"$match": {
-						"EBCC_VALIDATION_CODE": /^V/,
+						"EBCC_VALIDATION_CODE": type == "estate" ? /^V/ : type == "mill" ? /^M/ : null,
 						"SYNC_TIME": {
 							"$gte": parseInt( req.params.start_date ),
 							"$lte": parseInt( req.params.end_date )
@@ -72,6 +73,7 @@
 	  * --------------------------------------------------------------------
 	*/
 		exports.tr_ebcc = async ( req, res ) => {
+			let type = req.params.type;
 			var data = await EBCCValidationHeaderModel.aggregate( [
 				{
 					"$project": {
@@ -81,7 +83,7 @@
 				},
 				{
 					"$match": {
-						"EBCC_VALIDATION_CODE": /^V/,
+						"EBCC_VALIDATION_CODE": type == "estate" ? /^V/ : type == "mill" ? /^M/ : null,
 						"SYNC_TIME": {
 							"$gte": parseInt( req.params.start_date ),
 							"$lte": parseInt( req.params.end_date )
