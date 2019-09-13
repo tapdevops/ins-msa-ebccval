@@ -11,7 +11,7 @@
 		|--------------------------------------------------------------------------
 		*/
 			name: 'Microservice EBCC Validation',
-			env: 'dev', // prod, qa, dev,
+			env: 'qa', // prod, qa, dev,
 			port: {
 				dev: process.env.PORT || 4014,
 				qa: process.env.PORT || 5014,
