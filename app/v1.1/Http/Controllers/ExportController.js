@@ -51,6 +51,9 @@
 				{
 					"$match": {
 						"EBCC_VALIDATION_CODE": type == "estate" ? /^V/ : type == "mill" ? /^M/ : null,
+						// "EBCC_VALIDATION_CODE": { 
+						// 	"$regex": "V" 
+						// },
 						"SYNC_TIME": {
 							"$gte": parseInt( req.params.start_date ),
 							"$lte": parseInt( req.params.end_date )
@@ -83,7 +86,13 @@
 				},
 				{
 					"$match": {
+<<<<<<< HEAD
 						"EBCC_VALIDATION_CODE": type == "estate" ? /^V/ : type == "mill" ? /^M/ : null,
+=======
+						"EBCC_VALIDATION_CODE": { 
+							"$regex": "V" 
+						},
+>>>>>>> f99aee7b357f51cc1371ed95f48e7bec8eaf3978
 						"SYNC_TIME": {
 							"$gte": parseInt( req.params.start_date ),
 							"$lte": parseInt( req.params.end_date )
