@@ -3,15 +3,17 @@
  | Variable
  |--------------------------------------------------------------------------
  */
-	const mongoose = require( 'mongoose' );
+	const Mongoose = require( 'mongoose' );
 	
 /*
  |--------------------------------------------------------------------------
  | Schema
  |--------------------------------------------------------------------------
  */
-	const SummaryWeeklySchema = mongoose.Schema( {
-		TOTAL_EBCC: {
+	const EBCCValidationDetailSchema = Mongoose.Schema( {
+		EBCC_VALIDATION_CODE: String,
+		ID_KUALITAS: String,
+		JUMLAH: {
 			type: Number,
 			get: v => Math.floor( v ),
 			set: v => Math.floor( v ),
@@ -20,25 +22,8 @@
 				return 0;
 			}
 		},
-		TARGET_EBCC: {
-			type: Number,
-			get: v => Math.floor( v ),
-			set: v => Math.floor( v ),
-			alias: 'i',
-			default: function() {
-				return 0;
-			}
-		},
-		SUMMARY_DATE: {
-			type: Number,
-			get: v => Math.floor( v ),
-			set: v => Math.floor( v ),
-			alias: 'i',
-			default: function() {
-				return 0;
-			}
-		},
-		IS_VIEW: {
+		STATUS_SYNC: String,
+		SYNC_TIME: {
 			type: Number,
 			get: v => Math.floor( v ),
 			set: v => Math.floor( v ),
@@ -56,12 +41,22 @@
 			default: function() {
 				return 0;
 			}
+		},
+		UPDATE_USER: String,
+		UPDATE_TIME: {
+			type: Number,
+			get: v => Math.floor( v ),
+			set: v => Math.floor( v ),
+			alias: 'i',
+			default: function() {
+				return 0;
+			}
 		}
-	} );
+	});
 
 /*
 |--------------------------------------------------------------------------
 | Module Exports
 |--------------------------------------------------------------------------
 */
-	module.exports = mongoose.model( 'SummaryWeekly_v_1_1', SummaryWeeklySchema, 'TR_SUMMARY_WEEKLY' );
+	module.exports = Mongoose.model( 'EBCCValidationDetail_v_1_2', EBCCValidationDetailSchema, 'TR_D_EBCC_VALIDATION' );
