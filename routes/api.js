@@ -96,8 +96,6 @@
 			// Summary
 			app.get( '/api/v1.1/summary/generate', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Summary.process_weekly )
 
-
-
 		/*
 		 |--------------------------------------------------------------------------
 		 | API Versi 1.0
