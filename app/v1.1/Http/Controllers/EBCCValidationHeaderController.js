@@ -11,6 +11,7 @@
 
 	// Modules
 	const Validator = require( 'ferds-validator');
+	// const Kafka = require( 'kafka-node' );
 
 	// Libraries
 	const KafkaServer = require( _directory_base + '/app/v1.1/Http/Libraries/KafkaServer.js' );
@@ -124,7 +125,7 @@
 						} );
 					}
 					else {
-						KafkaServer.producer( "EBCC_VALIDATION|TR_H_EBCC_VALIDATION|INSERT|" + JSON.stringify( body ) );
+						KafkaServer.producer( 'INS_MSA_EBCCVAL_TR_EBCC_VALIDATION_H', JSON.stringify( body ) );
 					}
 
 					return res.send( {

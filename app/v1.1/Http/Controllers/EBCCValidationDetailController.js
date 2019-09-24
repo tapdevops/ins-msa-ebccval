@@ -11,6 +11,9 @@
 
 	// Modules
 	const validator = require( 'ferds-validator');
+	
+	// Libraries
+	const KafkaServer = require( _directory_base + '/app/v1.1/Http/Libraries/KafkaServer.js' );
 
 /*
  |--------------------------------------------------------------------------
@@ -65,18 +68,19 @@
 			console.log( run_validator.error_lists );
 
 			if ( run_validator.status == true ) {
-		 		var auth = req.auth;
-		 		var postdata = new EBCCValidationDetailModel( {
-		 			EBCC_VALIDATION_CODE: req.body.EBCC_VALIDATION_CODE,
-					ID_KUALITAS: req.body.ID_KUALITAS,
-					JUMLAH: req.body.JUMLAH,
-					INSERT_USER: req.body.INSERT_USER || "",
-					INSERT_TIME: req.body.INSERT_TIME || 0,
-					STATUS_SYNC: req.body.STATUS_SYNC || "",
-					SYNC_TIME: req.body.SYNC_TIME || 0,
-					UPDATE_USER: req.body.UPDATE_USER || "",
-					UPDATE_TIME: req.body.UPDATE_TIME || 0
-		 		} );
+				var auth = req.auth;
+				var body = {
+					EBCC_VALIDATION_CODE: req.body.EBCC_VALIDATION_CODE,
+				   	ID_KUALITAS: req.body.ID_KUALITAS,
+				   	JUMLAH: req.body.JUMLAH,
+				   	INSERT_USER: req.body.INSERT_USER || "",
+				   	INSERT_TIME: req.body.INSERT_TIME || 0,
+				   	STATUS_SYNC: req.body.STATUS_SYNC || "",
+				   	SYNC_TIME: req.body.SYNC_TIME || 0,
+				   	UPDATE_USER: req.body.UPDATE_USER || "",
+				   	UPDATE_TIME: req.body.UPDATE_TIME || 0
+				}
+		 		var postdata = new EBCCValidationDetailModel( body );
 
 		 		postdata.save()
 				.then( data => {
@@ -87,13 +91,17 @@
 							data: {}
 						} );
 					}
-					res.send( {
+					else {
+						KafkaServer.producer( 'INS_MSA_EBCCVAL_TR_EBCC_VALIDATION_D', JSON.stringify( body ) );
+					}
+					return res.send( {
 						status: true,
 						message: "Success!",
 						data: {}
 					} );
 				} ).catch( err => {
-					res.send( {
+					console.log(err)
+					return res.send( {
 						status: false,
 						message: "Error! Data gagal diproses.",
 						data: {}
@@ -101,7 +109,7 @@
 				} );
 			}
 			else {
-				res.send( {
+				return res.send( {
 					status: false,
 					message: "Data gagal diinput, periksa kembali inputan.",
 					data: {}
