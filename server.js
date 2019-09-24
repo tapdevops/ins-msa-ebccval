@@ -18,7 +18,7 @@
 	const Express = require( 'express' );
 	const Mongoose = require( 'mongoose' );
 	const Libraries = {
-		KafkaServer: require( './app/v1.1/Http/Libraries/KafkaServer.js' )
+		KafkaServer: require( './app/v1.2/Http/Libraries/KafkaServer.js' )
 	}
 
 	// Primary Variable

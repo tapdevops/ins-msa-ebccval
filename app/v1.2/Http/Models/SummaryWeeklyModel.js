@@ -64,4 +64,4 @@
 | Module Exports
 |--------------------------------------------------------------------------
 */
-	module.exports = mongoose.model( 'SummaryWeekly_v_1_1', SummaryWeeklySchema, 'TR_SUMMARY_WEEKLY' );
+	module.exports = mongoose.model( 'SummaryWeekly_v_1_2', SummaryWeeklySchema, 'TR_SUMMARY_WEEKLY' );

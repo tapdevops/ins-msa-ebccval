@@ -7,8 +7,8 @@
  |
  */
  	// Models
- 	const EBCCValidationDetailModel = require( _directory_base + '/app/v1.1/Http/Models/EBCCValidationDetailModel.js' );
- 	const EBCCValidationHeaderModel = require( _directory_base + '/app/v1.1/Http/Models/EBCCValidationHeaderModel.js' );
+ 	const EBCCValidationDetailModel = require( _directory_base + '/app/v1.2/Http/Models/EBCCValidationDetailModel.js' );
+ 	const EBCCValidationHeaderModel = require( _directory_base + '/app/v1.2/Http/Models/EBCCValidationHeaderModel.js' );
 
 /*
  |--------------------------------------------------------------------------
@@ -48,13 +48,9 @@
 						"HEADER": 0
 					}
 				},
-				// mill estate
 				{
 					"$match": {
 						"EBCC_VALIDATION_CODE": type == "estate" ? /^V/ : type == "mill" ? /^M/ : null,
-						// "EBCC_VALIDATION_CODE": { 
-						// 	"$regex": "V" 
-						// },
 						"SYNC_TIME": {
 							"$gte": parseInt( req.params.start_date ),
 							"$lte": parseInt( req.params.end_date )
@@ -77,7 +73,7 @@
 	  * --------------------------------------------------------------------
 	*/
 		exports.tr_ebcc = async ( req, res ) => {
-			var type = req.params.type;
+			let type = req.params.type;
 			var data = await EBCCValidationHeaderModel.aggregate( [
 				{
 					"$project": {
