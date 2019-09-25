@@ -125,7 +125,26 @@
 						} );
 					}
 					else {
-						KafkaServer.producer( 'INS_MSA_EBCCVAL_TR_EBCC_VALIDATION_H', JSON.stringify( body ) );
+						var kafka_body = {
+				 			EBVTC: req.body.EBCC_VALIDATION_CODE,
+							WERKS: req.body.WERKS,
+							AFD_CODE: req.body.AFD_CODE,
+							BLOCK_CODE: req.body.BLOCK_CODE,
+							NO_TPH: req.body.NO_TPH,
+							STPHS: req.body.STATUS_TPH_SCAN,
+							ALSNM: req.body.ALASAN_MANUAL || "",
+							LAT_TPH: req.body.LAT_TPH,
+							LON_TPH: req.body.LON_TPH,
+							DLVCD: req.body.DELIVERY_CODE,
+							SDLVC: req.body.STATUS_DELIVERY_CODE,
+							INSUR: req.body.INSERT_USER,
+							INSTM: req.body.INSERT_TIME,
+							SSYNC: req.body.STATUS_SYNC || "",
+							STIME: req.body.SYNC_TIME || 0,
+							UPTUR: req.body.UPDATE_USER || "",
+							UPTTM: req.body.UPDATE_TIME || 0
+				 		};
+						KafkaServer.producer( 'INS_MSA_EBCCVAL_TR_EBCC_VALIDATION_H', JSON.stringify( kafka_body ) );
 					}
 
 					return res.send( {
