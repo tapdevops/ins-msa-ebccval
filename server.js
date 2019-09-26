@@ -17,9 +17,6 @@
 	const BodyParser = require( 'body-parser' );
 	const Express = require( 'express' );
 	const Mongoose = require( 'mongoose' );
-	const Libraries = {
-		KafkaServer: require( './app/v1.2/Http/Libraries/KafkaServer.js' )
-	}
 
 	// Primary Variable
 	const App = Express();

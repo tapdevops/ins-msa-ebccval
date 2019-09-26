@@ -43,7 +43,6 @@
 			VerifyToken: require( _directory_base + '/app/v1.2/Http/Middleware/VerifyToken.js' )
 		},
 		v_1_1: {
-			KafkaServer: require( _directory_base + '/app/v1.1/Http/Middleware/KafkaServer.js' ),
 			VerifyToken: require( _directory_base + '/app/v1.1/Http/Middleware/VerifyToken.js' )
 		},
 		v_1_0: {
