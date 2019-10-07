@@ -21,6 +21,7 @@
 			EBCCValidationDetail: require( _directory_base + '/app/v1.1/Http/Controllers/EBCCValidationDetailController.js' ),
 			EBCCValidationHeader: require( _directory_base + '/app/v1.1/Http/Controllers/EBCCValidationHeaderController.js' ),
 			Export: require( _directory_base + '/app/v1.1/Http/Controllers/ExportController.js' ),
+			ExportKafka: require( _directory_base + '/app/v1.1/Http/Controllers/ExportKafkaController.js' ),
 			Kualitas: require( _directory_base + '/app/v1.1/Http/Controllers/KualitasController.js' ),
 			Report: require( _directory_base + '/app/v1.1/Http/Controllers/ReportController.js' ),
 			SyncMobile: require( _directory_base + '/app/v1.1/Http/Controllers/SyncMobileController.js' ),
@@ -123,6 +124,8 @@
 			// Export
 			app.get( '/api/v1.1/export/tr-ebcc/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Export.tr_ebcc );
 			app.get( '/api/v1.1/export/tr-ebcc-kualitas/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Export.tr_ebcc_kualitas );
+			app.get( '/api/v1.1/export-kafka/header', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.ExportKafka.export_header );
+			app.get( '/api/v1.1/export-kafka/detail', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.ExportKafka.export_detail );
 
 			// Kualitas
 			app.get( '/api/v1.1/ebcc/kualitas', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Kualitas.find );
