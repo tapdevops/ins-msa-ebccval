@@ -87,12 +87,11 @@
 						"EBCC_VALIDATION_CODE": type == "estate" ? /^V/ : type == "mill" ? /^M/ : null,
 						"SYNC_TIME": {
 							"$gte": parseInt( req.params.start_date ),
-							"$lte": parseInt( req.params.end_date )
+							"$lte": parseInt( req.params.end_date ) 
 						}
 					}
 				}
 			] );
-
 			return res.status( 200 ).json( {
 				status: true,
 				message: "Success!",

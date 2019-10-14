@@ -5,6 +5,8 @@
 */
 const Kafka = require( 'kafka-node' );
 
+//Models
+const KafkaLog = require( _directory_base + '/app/v1.1/Http/Models/KafkaErrorLogModel.js' );
 /*
 |--------------------------------------------------------------------------
 | Kafka Server Library
@@ -80,6 +82,21 @@ const Kafka = require( 'kafka-node' );
 				console.log( err );
 				console.log( '[KAFKA PRODUCER] - Connection Error.' );
 				//throw err;
+
+				//insert db
+				let data = JSON.parse( messages );
+				try{
+					let set = new KafkaLog( {
+						TR_CODE: data.EBVTC,
+						TOPIC: topic,
+						INSERT_TIME: data.INSTM
+					} );
+					set.save();
+					console.log( `simpan ke TR_KAFKA_ERROR_LOGS!` );
+				}
+				catch( error ) {
+					console.log( `error: ${error.message}` );
+				}
 			});
 		}
 
