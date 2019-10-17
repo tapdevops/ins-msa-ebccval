@@ -46,9 +46,13 @@
 		useNewUrlParser: true,
 		ssl: config.database.ssl
 	} ).then( () => {
-		console.log( "DB Status \t: Connected " + " (" + config.app.env + ")" );
+		console.log( 'Database' );
+		console.log( "\tDB Status \t: Connected " + " (" + config.app.env + ")" );
+		console.log( "\tMongoDB URL \t: " + config.database.url + " (" + config.app.env + ")" );
 	} ).catch( err => {
-		console.log( "DB Status \t: Connected " + " (" + config.app.env + ")" );
+		console.log( 'Database' );
+		console.log( "\tDB Status \t: Not Connected " + " (" + config.app.env + ")" );
+		console.log( "\tMongoDB URL \t: " + config.database.url + " (" + config.app.env + ")" );
 	} );
 
 	//scheduling job_update_transaksi_complete() with cron 
@@ -65,8 +69,10 @@
 
 	// Server Running Message
 	App.listen( parseInt( config.app.port[config.app.env] ), () => {
-		console.log( "App Name\t: " + config.app.name );
-		console.log( "App Port\t: " + config.app.port[config.app.env] );
+		console.log( 'Server' );
+		console.log( "\tStatus \t\t: OK" );
+		console.log( "\tService \t: " + config.app.name + " (" + config.app.env + ")" );
+		console.log( "\tPort \t\t: " + config.app.port[config.app.env] );
 	} );
 
 /*
