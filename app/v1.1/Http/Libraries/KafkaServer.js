@@ -3,8 +3,10 @@
 | Variable
 |--------------------------------------------------------------------------
 */
-	const Kafka = require( 'kafka-node' );
+const Kafka = require( 'kafka-node' );
 
+//Models
+const KafkaLog = require( _directory_base + '/app/v1.1/Http/Models/KafkaErrorLogModel.js' );
 /*
 |--------------------------------------------------------------------------
 | Kafka Server Library
@@ -19,48 +21,48 @@
 	class KafkaServer {
 
 		consumer () {
-			const Consumer = Kafka.Consumer;
-			const Client = new Kafka.KafkaClient( {
-				kafkaHost: '149.129.252.13:9092'
-			} );
-			const consumer_kafka_client = new Consumer(
-				Client,
-				[
-					{
-						topic: 'ferdinand_topic_ebcc', 
-						partition: 0 
-					}
-				],
-				{
-					autoCommit: true,
-					fetchMaxWaitMs: 1000,
-					fetchMaxBytes: 1024 * 1024,
-					encoding: 'utf8',
-					fromOffset: false
-				}
-			);
-			consumer_kafka_client.on( 'message', async function( message ) {
-				// var value = message.value.split( "|" );
-				// var data = JSON.parse( value[1] );
-				console.log( message );
-			})
-			consumer_kafka_client.on( 'error', function( err ) {
-				console.log( 'error', err );
-			});
+			// const Consumer = Kafka.Consumer;
+			// const Client = new Kafka.KafkaClient( {
+			// 	kafkaHost: '149.129.252.13:9092'
+			// } );
+			// const consumer_kafka_client = new Consumer(
+			// 	Client,
+			// 	[
+			// 		{
+			// 			topic: 'ferdinand_topic_ebcc', 
+			// 			partition: 0 
+			// 		}
+			// 	],
+			// 	{
+			// 		autoCommit: true,
+			// 		fetchMaxWaitMs: 1000,
+			// 		fetchMaxBytes: 1024 * 1024,
+			// 		encoding: 'utf8',
+			// 		fromOffset: false
+			// 	}
+			// );
+			// consumer_kafka_client.on( 'message', async function( message ) {
+			// 	// var value = message.value.split( "|" );
+			// 	// var data = JSON.parse( value[1] );
+			// 	console.log( message );
+			// })
+			// consumer_kafka_client.on( 'error', function( err ) {
+			// 	console.log( 'error', err );
+			// });
 		}
 
-		producer ( messages ) {
+		producer ( topic, messages ) {
 			// Class
 			const Producer = Kafka.Producer;
 			const Client = new Kafka.KafkaClient( { 
-				kafkaHost: '149.129.252.13:9092' 
+				kafkaHost: config.app.kafka[config.app.env].server_host
 			} );
 
 			// Variable
 			const producer_kafka_client = new Producer( Client );
 			const payloads = [
 				{
-					topic: 'ferdinand_topic_ebcc',
+					topic: topic,
 					messages: messages
 					
 				}
@@ -79,7 +81,22 @@
 			producer_kafka_client.on( 'error', function( err ) {
 				console.log( err );
 				console.log( '[KAFKA PRODUCER] - Connection Error.' );
-				throw err;
+				//throw err;
+
+				//insert db
+				let data = JSON.parse( messages );
+				try{
+					let set = new KafkaLog( {
+						TR_CODE: data.EBVTC,
+						TOPIC: topic,
+						INSERT_TIME: data.INSTM
+					} );
+					set.save();
+					console.log( `simpan ke TR_KAFKA_ERROR_LOGS!` );
+				}
+				catch( error ) {
+					console.log( `error: ${error.message}` );
+				}
 			});
 		}
 
