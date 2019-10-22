@@ -110,6 +110,7 @@
 		var max_date = parseInt( MomentTimezone( date_now ).tz( "Asia/Jakarta" ).format( "YYYYMMDD" ) + '235959' );
 	
 		( new NodeRestClient() ).get( url.user_data, args, async function ( data, response ) {
+			console.log( data.status );
 			if ( data.status == true ) {
 				data = data.data;
 
@@ -137,7 +138,6 @@
 					    },
 
 					] );
-
 					var location_code = dt.LOCATION_CODE.split( ',' );
 
 					console.log(location_code);
