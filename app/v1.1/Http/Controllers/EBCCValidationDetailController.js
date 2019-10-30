@@ -27,103 +27,54 @@
 	  * --------------------------------------------------------------------
 	*/
 	 	exports.create = ( req, res ) => {
-	 		var rules = [
-	 			{
-					"name": "EBCC_VALIDATION_CODE",
-					"value": req.body.EBCC_VALIDATION_CODE,
-					"rules": "required|alpha_numeric"
-				},
-				{
-					"name": "ID_KUALITAS",
-					"value": req.body.ID_KUALITAS,
-					"rules": "required|numeric"
-				},
-				{
-					"name": "JUMLAH",
-					"value": req.body.JUMLAH.toString(),
-					"rules": "required|numeric"
-				},
-				{
-					"name": "INSERT_USER",
-					"value": req.body.INSERT_USER,
-					"rules": "required|alpha_numeric"
-				},
-				{
-					"name": "INSERT_TIME",
-					"value": req.body.INSERT_TIME.toString(),
-					"rules": "required|exact_length(14)|numeric"
-				},
-				{
-					"name": "STATUS_SYNC",
-					"value": req.body.STATUS_SYNC,
-					"rules": "required|alpha"
-				},
-				{
-					"name": "SYNC_TIME",
-					"value": req.body.SYNC_TIME.toString(),
-					"rules": "required|exact_length(14)|numeric"
-				}
-			];
-			var run_validator = validator.run( rules );
-			console.log( run_validator.error_lists );
+			var auth = req.auth;
+			var body = {
+				EBCC_VALIDATION_CODE: req.body.EBCC_VALIDATION_CODE,
+				ID_KUALITAS: req.body.ID_KUALITAS,
+				JUMLAH: req.body.JUMLAH,
+				INSERT_USER: req.body.INSERT_USER || "",
+				INSERT_TIME: req.body.INSERT_TIME || 0,
+				STATUS_SYNC: req.body.STATUS_SYNC || "",
+				SYNC_TIME: req.body.SYNC_TIME || 0,
+				UPDATE_USER: req.body.UPDATE_USER || "",
+				UPDATE_TIME: req.body.UPDATE_TIME || 0
+			}
+		 	var postdata = new EBCCValidationDetailModel( body );
 
-			if ( run_validator.status == true ) {
-				var auth = req.auth;
-				var body = {
-					EBCC_VALIDATION_CODE: req.body.EBCC_VALIDATION_CODE,
-					ID_KUALITAS: req.body.ID_KUALITAS,
-					JUMLAH: req.body.JUMLAH,
-					INSERT_USER: req.body.INSERT_USER || "",
-					INSERT_TIME: req.body.INSERT_TIME || 0,
-					STATUS_SYNC: req.body.STATUS_SYNC || "",
-					SYNC_TIME: req.body.SYNC_TIME || 0,
-					UPDATE_USER: req.body.UPDATE_USER || "",
-					UPDATE_TIME: req.body.UPDATE_TIME || 0
-				}
-		 		var postdata = new EBCCValidationDetailModel( body );
-
-		 		postdata.save()
-				.then( data => {
-					if ( !data ) {
-						return res.send( {
-							status: false,
-							message: "Error! Terjadi kesalahan, data tidak diproses.",
-							data: {}
-						} );
-					}
-					else {
-						var kafka_body = {
-							EBVTC: req.body.EBCC_VALIDATION_CODE,
-							IDKLT: req.body.ID_KUALITAS,
-							JML: req.body.JUMLAH,
-							INSUR: req.body.INSERT_USER || "",
-							INSTM: req.body.INSERT_TIME || 0,
-							SSYNC: req.body.STATUS_SYNC || "",
-							STIME: req.body.SYNC_TIME || 0,
-							UPTUR: req.body.UPDATE_USER || "",
-							UPTTM: req.body.UPDATE_TIME || 0
-						}
-						KafkaServer.producer( 'INS_MSA_EBCCVAL_TR_EBCC_VALIDATION_D', JSON.stringify( kafka_body ) );
-					}
-					return res.send( {
-						status: true,
-						message: "Success!",
-						data: {}
-					} );
-				} ).catch( err => {
-					console.log(err)
+		 	postdata.save()
+			.then( data => {
+				if ( !data ) {
 					return res.send( {
 						status: false,
-						message: "Error! Data gagal diproses.",
+						message: "Error! Terjadi kesalahan, data tidak diproses.",
 						data: {}
 					} );
-				} );
-			}
-			else {
+				}
+				else {
+					var kafka_body = {
+						EBVTC: req.body.EBCC_VALIDATION_CODE,
+						IDKLT: req.body.ID_KUALITAS,
+						JML: req.body.JUMLAH,
+						INSUR: req.body.INSERT_USER || "",
+						INSTM: req.body.INSERT_TIME || 0,
+						SSYNC: req.body.STATUS_SYNC || "",
+						STIME: req.body.SYNC_TIME || 0,
+						UPTUR: req.body.UPDATE_USER || "",
+						UPTTM: req.body.UPDATE_TIME || 0
+					}
+					KafkaServer.producer( 'INS_MSA_EBCCVAL_TR_EBCC_VALIDATION_D', JSON.stringify( kafka_body ) );
+				}
 				return res.send( {
-					status: false,
-					message: "Data gagal diinput, periksa kembali inputan.",
+					status: true,
+					message: "Success!",
 					data: {}
 				} );
-			}
+			} ).catch( err => {
+				console.log(err)
+				return res.send( {
+					status: false,
+					message: "Error! Data gagal diproses.",
+					data: {}
+				} );
+			} );
 	 	}
