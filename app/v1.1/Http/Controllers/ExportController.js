@@ -59,7 +59,7 @@
 					}
 				}
 			] );
-
+			console.log( data.length );
 			return res.status( 200 ).json( {
 				status: true,
 				message: "Success!",
