@@ -123,6 +123,88 @@
                     status: false,
                     message: err.message
                 } )
-            }
-            
+            }            
         }
+        
+        exports.find_by_month = async ( req, res ) => {
+            let start = req.params.month;
+            if ( isNaN( parseInt( start ) ) || start.length !== 6 ) {
+                return res.send( {
+                    status: false,
+                    message: 'Periksa Param Bulan',
+                    data: {}
+                } );
+            }
+            let end;
+            if ( start.substring( 4, 6 ) === '12' ) {
+                end = parseInt( start ) + 100;
+            } else {
+                end = parseInt( start ) + 1;
+            }
+            try {
+                const ebccDetailCount = await EBCCValidationDetailModel.countDocuments( {
+                    INSERT_TIME: {
+                        $gte: parseInt( start + '01000000' ),
+                        $lte: parseInt( end + '01000000' )
+                    }
+                } );
+                const ebccHeaderCount = await EBCCValidationHeaderModel.countDocuments( {
+                    INSERT_TIME: {
+                        $gte: parseInt( start + '01000000' ),
+                        $lte: parseInt( end + '01000000' )
+                    }
+                } );
+                
+                res.send( {
+                    status: true,
+                    message: 'Data dari ' + start + '01000000 sampai ' + end + '01000000',
+                    data: {
+                        TR_D_EBCC_VALIDATION: ebccDetailCount,
+                        TR_H_EBCC_VALIDATION: ebccHeaderCount
+                    }    
+                } );
+            } catch ( error ) {
+                res.send( {
+                    status: false,
+                    message: 'Internal Server Error: ' + error.message,
+                    data: []
+                } );
+            }
+        }
+           // let result = [];
+           // try {
+           // 	const data = await EBCCValidationDetailModel.aggregate( [
+           // 		{
+           // 			$match: {
+
+           // 			}
+           // 		},
+           // 		{
+           // 			$project: {
+           // 				_id: 0
+           // 			}
+           // 		}
+           // 	] );
+           // 	for ( let i = 0; i < data.length; i++ ) {
+           // 		result.push( {
+           // 			EBCC_VALIDATION_CODE: data[i].EBCC_VALIDATION_CODE,
+           // 			ID_KUALITAS: data[i].ID_KUALITAS,
+           // 			JUMLAH: parseInt( data[i].JUMLAH ),
+           // 			INSERT_USER: data[i].INSERT_USER,
+           // 			INSERT_TIME: parseInt( data[i].INSERT_TIME ),
+           // 			STATUS_SYNC: data[i].STATUS_SYNC,
+           // 			SYNC_TIME: parseInt( data[i].SYNC_TIME ),
+           // 			UPDATE_USER: data[i].UPDATE_USER,
+           // 			UPDATE_TIME: parseInt( data[i].UPDATE_TIME ), 
+           // 			__v: data[i].__v 
+           // 		} )
+           // 	}
+           // 	res.send( {
+           // 		result
+           // 	} )
+           // } catch ( error ) {
+           // 	res.send( {
+           // 		message: 'Error'
+           // 	} )
+           // }
+        

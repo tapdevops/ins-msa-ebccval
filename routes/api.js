@@ -90,6 +90,7 @@
 			app.post( '/api/v1.2/ebcc/validation/header', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.EBCCValidationHeader.create );
 
 			// Export
+
 			app.get( '/api/v1.2/export/tr-ebcc/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Export.tr_ebcc );
 			app.get( '/api/v1.2/export/tr-ebcc-kualitas/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Export.tr_ebcc_kualitas );
 
@@ -117,9 +118,12 @@
 		 */
 			// EBCC Validation Detail
 			app.post( '/api/v1.1/ebcc/validation/detail', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.EBCCValidationDetail.create );
-
+			
 			// EBCC Validation Header
 			app.post( '/api/v1.1/ebcc/validation/header', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.EBCCValidationHeader.create );
+
+			// GET EBCC Validation Header & Detail By Month
+			app.get( '/api/v1.1/ebcc/validation-month/:month', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.ExportKafka.find_by_month );
 
 			// Export
 			app.get( '/api/v1.1/export/tr-ebcc/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Export.tr_ebcc );
