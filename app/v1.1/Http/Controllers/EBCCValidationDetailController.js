@@ -26,8 +26,19 @@
 	  * @return json
 	  * --------------------------------------------------------------------
 	*/
-	 	exports.create = ( req, res ) => {
+	 	exports.create = async ( req, res ) => {
 			var auth = req.auth;
+			let count = await EBCCValidationDetailModel.findOne( { 
+				EBCC_VALIDATION_CODE: req.body.EBCC_VALIDATION_CODE,
+				ID_KUALITAS: req.body.ID_KUALITAS
+			} ).count();
+			if ( count > 0 ) {
+				return res.send( {
+					status: true,
+					message: 'Skip save!',
+					data: []
+				} );
+			}
 			var body = {
 				EBCC_VALIDATION_CODE: req.body.EBCC_VALIDATION_CODE,
 				ID_KUALITAS: req.body.ID_KUALITAS,

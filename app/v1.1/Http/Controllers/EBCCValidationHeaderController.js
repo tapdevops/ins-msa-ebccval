@@ -27,8 +27,18 @@
 	  * @return json
 	  * --------------------------------------------------------------------
 	*/
-	 	exports.create = ( req, res ) => {
-		 	var auth = req.auth;
+	 	exports.create = async ( req, res ) => {
+			var auth = req.auth;
+			let count = await EBCCValidationHeaderModel.findOne( {
+				EBCC_VALIDATION_CODE: req.body.EBCC_VALIDATION_CODE
+			} ).count();
+			if ( count > 0 ) {
+				return res.send( {
+					status: true,
+					message: 'Skip save!',
+					data: []
+				} );
+			}
 		 	var body = {
 		 		EBCC_VALIDATION_CODE: req.body.EBCC_VALIDATION_CODE,
 				WERKS: req.body.WERKS,
@@ -49,7 +59,7 @@
 				UPDATE_TIME: req.body.UPDATE_TIME || 0
 		 	};
 		 	var postdata = new EBCCValidationHeaderModel( body );
-
+			
 		 	postdata.save()
 			.then( data => {
 				if ( !data ) {
