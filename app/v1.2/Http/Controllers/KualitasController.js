@@ -138,22 +138,24 @@
 				query = url_query;
 				query.DELETE_TIME = 0
 			}
-
-			var query = await KualitasModel.find( query )
-				.select( {
-					_id: 0,
-					ID_KUALITAS: 1,
-					NAMA_KUALITAS: 1,
-					UOM: 1,
-					GROUP_KUALITAS: 1,
-					ACTIVE_STATUS: 1,
-					PENALTY_STATUS: 1,
-					SHORT_NAME: 1
-				} );
+			console.log( query );
+			var dataKualitas = await KualitasModel.find( {
+				DELETE_TIME: 0
+			} )
+			.select( {
+				_id: 0,
+				ID_KUALITAS: 1,
+				NAMA_KUALITAS: 1,
+				UOM: 1,
+				GROUP_KUALITAS: 1,
+				ACTIVE_STATUS: 1,
+				PENALTY_STATUS: 1,
+				SHORT_NAME: 1
+			} );
 			
 			res.json({
 				status: true,
 				message: "Success!",
-				data: query
+				data: dataKualitas
 			});
 		};
