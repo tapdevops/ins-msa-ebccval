@@ -84,36 +84,36 @@ module.exports = (app) => {
 	 |--------------------------------------------------------------------------
 	 */
 	// EBCC Validation Detail
-	app.post('/api/v1.2/ebcc/validation/detail', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.EBCCValidationDetail.create);
+	app.post('/api/v1.2/ebcc/validation/detail', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.EBCCValidationDetail.create);
 
 	// EBCC Validation Header
-	app.post('/api/v1.2/ebcc/validation/header', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.EBCCValidationHeader.create);
+	app.post('/api/v1.2/ebcc/validation/header', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.EBCCValidationHeader.create);
 
 	// GET EBCC Validation Header & Detail By Month
-	app.get('/api/v1.2/ebcc/validation-month/:month', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.ExportKafka.find_by_month);
+	app.get('/api/v1.2/ebcc/validation-month/:month', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.ExportKafka.find_by_month);
 
 	// Export
-	app.get('/api/v1.2/export/tr-ebcc/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Export.tr_ebcc);
-	app.get('/api/v1.2/export/tr-ebcc-kualitas/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Export.tr_ebcc_kualitas);
-	app.get('/api/v1.2/export-kafka/header', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.ExportKafka.export_header);
-	app.get('/api/v1.2/export-kafka/detail', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.ExportKafka.export_detail);
+	app.get('/api/v1.2/export/tr-ebcc/:start_date/:end_date/:type', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.Export.tr_ebcc);
+	app.get('/api/v1.2/export/tr-ebcc-kualitas/:start_date/:end_date/:type', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.Export.tr_ebcc_kualitas);
+	app.get('/api/v1.2/export-kafka/header', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.ExportKafka.export_header);
+	app.get('/api/v1.2/export-kafka/detail', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.ExportKafka.export_detail);
 
 	// Kualitas
-	app.get('/api/v1.2/ebcc/kualitas', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Kualitas.find);
+	app.get('/api/v1.2/ebcc/kualitas', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.Kualitas.find);
 
-	app.post('/api/v1.2/summary', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Summary.ebcc);
+	app.post('/api/v1.2/summary', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.Summary.ebcc);
 
 	// Report
-	app.get('/api/v1.2/report/web/per-baris/:werks/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Report.web_report_per_baris);
+	app.get('/api/v1.2/report/web/per-baris/:werks/:start_date/:end_date/:type', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.Report.web_report_per_baris);
 
 	// Sync Mobile
-	app.get('/api/v1.2/sync-mobile/kualitas/:start_date/:end_date', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.SyncMobile.synchronize);
+	app.get('/api/v1.2/sync-mobile/kualitas/:start_date/:end_date', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.SyncMobile.synchronize);
 
 	// Sync TAP
-	app.post('/api/v1.2/sync-tap/kualitas', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Kualitas.create_or_update);
+	app.post('/api/v1.2/sync-tap/kualitas', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.Kualitas.create_or_update);
 
 	// Summary
-	app.get('/api/v1.2/summary/generate', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Summary.process_weekly)
+	app.get('/api/v1.2/summary/generate', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.Summary.process_weekly)
 
 	/*
 	 |--------------------------------------------------------------------------
