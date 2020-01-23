@@ -46,21 +46,18 @@
 				$limit: 1
 			}
  		] );
-
-		if( req.body.IS_VIEW == 1 ){
-			SummaryWeeklyModel.findOneAndUpdate( {
-				INSERT_USER: req.auth.USER_AUTH_CODE,
-				IS_VIEW : 0	
-			},
-			{
-				IS_VIEW: 1
-			},
-			{
-				new: true
-			} ).then( data => {
-				console.log( data );
-			} )
-		}
+		SummaryWeeklyModel.findOneAndUpdate( {
+			INSERT_USER: req.auth.USER_AUTH_CODE,
+			IS_VIEW : 0	
+		},
+		{
+			IS_VIEW: 1
+		},
+		{
+			new: true
+		} ).then( data => {
+			console.log( data );
+		} )
 
 		if ( ebcc_query.length == 0 ) {
 			var now = HelperLib.date_format( 'now', 'YYYYMMDDhhmmss' );
@@ -75,7 +72,7 @@
 			set.save();
 		}
  		return res.status( 200 ).json( {
- 			status: ( ebcc_query.length > 0 ? ( ebcc_query[0].IS_VIEW == 1 ? false : true ) : true ),
+ 			status: true,//( ebcc_query.length > 0 ? ( ebcc_query[0].IS_VIEW == 1 ? false : true ) : true ),
  			message: "OK",
  			data: {
  				jumlah: ( ebcc_query.length > 0 ? ebcc_query[0].TOTAL_EBCC : 0 ),
@@ -110,6 +107,7 @@
 		var max_date = parseInt( MomentTimezone( date_now ).tz( "Asia/Jakarta" ).format( "YYYYMMDD" ) + '235959' );
 	
 		( new NodeRestClient() ).get( url.user_data, args, async function ( data, response ) {
+			console.log( data.status );
 			if ( data.status == true ) {
 				data = data.data;
 
@@ -137,7 +135,6 @@
 					    },
 
 					] );
-
 					var location_code = dt.LOCATION_CODE.split( ',' );
 
 					console.log(location_code);

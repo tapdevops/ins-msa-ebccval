@@ -7,10 +7,10 @@
  |
  */
  	// Models
- 	const KualitasModel = require( _directory_base + '/app/v1.2/Http/Models/KualitasModel.js' );
+ 	const KualitasModel = require( _directory_base + '/app/v2.0/Http/Models/KualitasModel.js' );
 
  	// Libraries
- 	const HelperLib = require( _directory_base + '/app/v1.2/Http/Libraries/HelperLib.js' );
+ 	const HelperLib = require( _directory_base + '/app/v2.0/Http/Libraries/HelperLib.js' );
 
 /*
  |--------------------------------------------------------------------------

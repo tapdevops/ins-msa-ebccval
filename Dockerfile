@@ -18,3 +18,5 @@ EXPOSE 5014
 
 # Running command
 CMD [ "node", "server.js" ]
+
+#Dwi A. Setiawan

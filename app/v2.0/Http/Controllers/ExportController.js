@@ -7,8 +7,8 @@
  |
  */
  	// Models
- 	const EBCCValidationDetailModel = require( _directory_base + '/app/v1.2/Http/Models/EBCCValidationDetailModel.js' );
- 	const EBCCValidationHeaderModel = require( _directory_base + '/app/v1.2/Http/Models/EBCCValidationHeaderModel.js' );
+ 	const EBCCValidationDetailModel = require( _directory_base + '/app/v2.0/Http/Models/EBCCValidationDetailModel.js' );
+ 	const EBCCValidationHeaderModel = require( _directory_base + '/app/v2.0/Http/Models/EBCCValidationHeaderModel.js' );
 
 /*
  |--------------------------------------------------------------------------

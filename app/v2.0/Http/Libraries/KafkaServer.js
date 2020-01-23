@@ -6,7 +6,7 @@
 const Kafka = require( 'kafka-node' );
 
 //Models
-const KafkaLog = require( _directory_base + '/app/v1.2/Http/Models/KafkaErrorLogModel.js' );
+const KafkaLog = require( _directory_base + '/app/v2.0/Http/Models/KafkaErrorLogModel.js' );
 /*
 |--------------------------------------------------------------------------
 | Kafka Server Library

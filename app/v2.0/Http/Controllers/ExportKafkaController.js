@@ -7,15 +7,15 @@
  |
  */
  	// Models
-     const EBCCValidationHeaderModel = require( _directory_base + '/app/v1.1/Http/Models/EBCCValidationHeaderModel.js' );
-     const EBCCValidationDetailModel = require( _directory_base + '/app/v1.1/Http/Models/EBCCValidationDetailModel.js' );
+     const EBCCValidationHeaderModel = require( _directory_base + '/app/v2.0/Http/Models/EBCCValidationHeaderModel.js' );
+     const EBCCValidationDetailModel = require( _directory_base + '/app/v2.0/Http/Models/EBCCValidationDetailModel.js' );
 
 	// Modules
     const Kafka = require( 'kafka-node' );
 	// const Kafka = require( 'kafka-node' );
 
 	// Libraries
-	const KafkaServer = require( _directory_base + '/app/v1.1/Http/Libraries/KafkaServer.js' );
+	const KafkaServer = require( _directory_base + '/app/v2.0/Http/Libraries/KafkaServer.js' );
 
 /*
  |--------------------------------------------------------------------------

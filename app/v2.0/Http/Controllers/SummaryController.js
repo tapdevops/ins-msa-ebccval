@@ -7,15 +7,15 @@
  |
  */
  	// Models
- 	const EBCCValidationHeaderModel = require( _directory_base + '/app/v1.1/Http/Models/EBCCValidationHeaderModel.js' );
- 	const KualitasModel = require( _directory_base + '/app/v1.1/Http/Models/KualitasModel.js' );
-	const SummaryWeeklyModel = require( _directory_base + '/app/v1.1/Http/Models/SummaryWeeklyModel.js' );
+ 	const EBCCValidationHeaderModel = require( _directory_base + '/app/v2.0/Http/Models/EBCCValidationHeaderModel.js' );
+ 	const KualitasModel = require( _directory_base + '/app/v2.0/Http/Models/KualitasModel.js' );
+	const SummaryWeeklyModel = require( _directory_base + '/app/v2.0/Http/Models/SummaryWeeklyModel.js' );
  	// Node Modules
  	const MomentTimezone = require( 'moment-timezone' );
  	const NodeRestClient = require( 'node-rest-client' ).Client;
 
  	// Libraries
- 	const HelperLib = require( _directory_base + '/app/v1.1/Http/Libraries/HelperLib.js' );
+ 	const HelperLib = require( _directory_base + '/app/v2.0/Http/Libraries/HelperLib.js' );
 
 /*
  |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@
 	*/
 	exports.process_weekly = async ( req, res ) => {
 		var url = {
- 			user_data: config.app.url[config.app.env].microservice_auth + '/api/v1.1/user/data',
+ 			user_data: config.app.url[config.app.env].microservice_auth + '/api/v2.0/user/data',
  			time_daily: config.app.url[config.app.env].ldap_2 + '/dw/time-daily/get-active-date-min-7',
  			jumlah_krani_buah: config.app.url[config.app.env].ldap_2 + '/dw/employee-sap/get-krani-buah'
  		};
