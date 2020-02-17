@@ -108,8 +108,8 @@ module.exports = (app) => {
 	// Export
 	app.get('/api/v2.0/export/tr-ebcc/:start_date/:end_date/:type', Middleware.v_2_0.VerifyToken, Controllers.v_2_0.Export.tr_ebcc);
 	app.get('/api/v2.0/export/tr-ebcc-kualitas/:start_date/:end_date/:type', Middleware.v_2_0.VerifyToken, Controllers.v_2_0.Export.tr_ebcc_kualitas);
-	app.get('/api/v2.0/export-kafka/header', Middleware.v_2_0.VerifyToken, Controllers.v_2_0.ExportKafka.export_header);
-	app.get('/api/v2.0/export-kafka/detail', Middleware.v_2_0.VerifyToken, Controllers.v_2_0.ExportKafka.export_detail);
+	// app.get('/api/v2.0/export-kafka/header', Middleware.v_2_0.VerifyToken, Controllers.v_2_0.ExportKafka.export_header);
+	// app.get('/api/v2.0/export-kafka/detail', Middleware.v_2_0.VerifyToken, Controllers.v_2_0.ExportKafka.export_detail);
 
 	// Kualitas
 	app.get('/api/v2.0/ebcc/kualitas', Middleware.v_2_0.VerifyToken, Controllers.v_2_0.Kualitas.find);
@@ -145,8 +145,8 @@ module.exports = (app) => {
 	// Export
 	app.get('/api/v1.2/export/tr-ebcc/:start_date/:end_date/:type', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.Export.tr_ebcc);
 	app.get('/api/v1.2/export/tr-ebcc-kualitas/:start_date/:end_date/:type', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.Export.tr_ebcc_kualitas);
-	app.get('/api/v1.2/export-kafka/header', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.ExportKafka.export_header);
-	app.get('/api/v1.2/export-kafka/detail', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.ExportKafka.export_detail);
+	// app.get('/api/v1.2/export-kafka/header', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.ExportKafka.export_header);
+	// app.get('/api/v1.2/export-kafka/detail', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.ExportKafka.export_detail);
 
 	// Kualitas
 	app.get('/api/v1.2/ebcc/kualitas', Middleware.v_1_2.VerifyToken, Controllers.v_1_2.Kualitas.find);
@@ -182,8 +182,8 @@ module.exports = (app) => {
 	// Export
 	app.get('/api/v1.1/export/tr-ebcc/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Export.tr_ebcc);
 	app.get('/api/v1.1/export/tr-ebcc-kualitas/:start_date/:end_date/:type', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Export.tr_ebcc_kualitas);
-	app.get('/api/v1.1/export-kafka/header', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.ExportKafka.export_header);
-	app.get('/api/v1.1/export-kafka/detail', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.ExportKafka.export_detail);
+	// app.get('/api/v1.1/export-kafka/header', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.ExportKafka.export_header);
+	// app.get('/api/v1.1/export-kafka/detail', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.ExportKafka.export_detail);
 
 	// Kualitas
 	app.get('/api/v1.1/ebcc/kualitas', Middleware.v_1_1.VerifyToken, Controllers.v_1_1.Kualitas.find);
