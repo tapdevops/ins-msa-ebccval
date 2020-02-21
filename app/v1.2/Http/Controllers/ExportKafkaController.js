@@ -58,7 +58,7 @@
                     UPTTM: data.UPDATE_TIME || 0
                 }
                 console.log( ++index );
-                KafkaServer.producer( 'INS_MSA_EBCCVAL_TR_EBCC_VALIDATION_H', JSON.stringify( kafka_body ));   
+                //KafkaServer.producer( 'INS_MSA_EBCCVAL_TR_EBCC_VALIDATION_H', JSON.stringify( kafka_body ));   
             } )
         }
 
@@ -112,7 +112,7 @@
                             UPTUR: data.UPDATE_USER,
                             UPTTM: data.UPDATE_TIME
                         }
-                        KafkaServer.producer( 'INS_MSA_EBCCVAL_TR_EBCC_VALIDATION_D', JSON.stringify( kafka_body ) );
+                        //KafkaServer.producer( 'INS_MSA_EBCCVAL_TR_EBCC_VALIDATION_D', JSON.stringify( kafka_body ) );
                     } );
                 // }
                 res.send( {

@@ -73,7 +73,7 @@
 						UPTUR: req.body.UPDATE_USER || "",
 						UPTTM: req.body.UPDATE_TIME || 0
 					}
-					KafkaServer.producer( 'INS_MSA_EBCCVAL_TR_EBCC_VALIDATION_D', JSON.stringify( kafka_body ) );
+					//KafkaServer.producer( 'INS_MSA_EBCCVAL_TR_EBCC_VALIDATION_D', JSON.stringify( kafka_body ) );
 				}
 				return res.send( {
 					status: true,
