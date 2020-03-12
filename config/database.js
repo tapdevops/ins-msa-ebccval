@@ -11,7 +11,7 @@
 	module.exports = {
 		
 		dev: {
-			url: 'mongodb://s_ebcc_validation:s_ebcc_validation@dbappdev.tap-agri.com:4848/s_ebcc_validation?authSource=s_ebcc_validation',
+			url: 'mongodb://s_ebcc_validation:s_ebcc_validation@dbappdev.tap-agri.net:4848/s_ebcc_validation?authSource=s_ebcc_validation',
 			ssl: false
 		},
 		qa: {
