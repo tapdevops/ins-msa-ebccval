@@ -75,6 +75,10 @@ App.listen(parseInt(config.app.port[config.app.env]), () => {
 	console.log("\tPort \t\t: " + config.app.port[config.app.env]);
 });
 
+const timeout = require('connect-timeout');
+//set timeout 5 minutes
+App.use(timeout('300s'));
+
 /*
 |--------------------------------------------------------------------------
 | Cron
