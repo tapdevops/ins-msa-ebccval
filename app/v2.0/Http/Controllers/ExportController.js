@@ -66,6 +66,38 @@
 				data: data
 			} );
 		};
+ 	/** 
+ 	  * EBCC Validation Header
+ 	  *
+ 	  * Memasukkan data ke TR_EBCC (Oracle TAP)
+	  * --------------------------------------------------------------------
+	*/
+		exports.tr_ebcc_kualitas_raw = async ( req, res ) => {
+			let type = req.params.type;
+			var data = await EBCCValidationDetailModel.aggregate( [
+				{
+					"$project": {
+						"_id": 0,
+						"__v": 0
+					}
+				},
+				// mill estate
+				{
+					"$match": {
+						"EBCC_VALIDATION_CODE": type == "estate" ? /^V/ : type == "mill" ? /^M/ : null,
+						"SYNC_TIME": {
+							"$gte": parseInt( req.params.start_date ),
+							"$lte": parseInt( req.params.end_date )
+						}
+					}
+				}
+			] );
+			return res.status( 200 ).json( {
+				status: true,
+				message: "Success!",
+				data: data
+			} );
+		};
 	
  	/** 
  	  * EBCC Validation Header
