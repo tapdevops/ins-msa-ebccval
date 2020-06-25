@@ -108,6 +108,7 @@ module.exports = (app) => {
 	// Export
 	app.get('/api/v2.0/export/tr-ebcc/:start_date/:end_date/:type', Middleware.v_2_0.VerifyToken, Controllers.v_2_0.Export.tr_ebcc);
 	app.get('/api/v2.0/export/tr-ebcc-kualitas/:start_date/:end_date/:type', Middleware.v_2_0.VerifyToken, Controllers.v_2_0.Export.tr_ebcc_kualitas);
+	app.get('/api/v2.0/export/tr-ebcc-kualitas-raw/:start_date/:end_date/:type', Middleware.v_2_0.VerifyToken, Controllers.v_2_0.Export.tr_ebcc_kualitas_raw);
 	// app.get('/api/v2.0/export-kafka/header', Middleware.v_2_0.VerifyToken, Controllers.v_2_0.ExportKafka.export_header);
 	// app.get('/api/v2.0/export-kafka/detail', Middleware.v_2_0.VerifyToken, Controllers.v_2_0.ExportKafka.export_detail);
 
