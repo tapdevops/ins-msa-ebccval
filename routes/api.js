@@ -8,6 +8,10 @@ const RoutesVersioning = require('express-routes-versioning')();
 
 // Controllers
 const Controllers = {
+	v_2_2: {
+		EBCCValidationDetail: require(_directory_base + '/app/v2.2/Http/Controllers/EBCCValidationDetailController.js'),
+		EBCCValidationHeader: require(_directory_base + '/app/v2.2/Http/Controllers/EBCCValidationHeaderController.js'),
+	},
 	v_2_1: {
 		EBCCValidationDetail: require(_directory_base + '/app/v2.1/Http/Controllers/EBCCValidationDetailController.js'),
 		EBCCValidationHeader: require(_directory_base + '/app/v2.1/Http/Controllers/EBCCValidationHeaderController.js'),
@@ -94,6 +98,15 @@ module.exports = (app) => {
 			}
 		})
 	});
+
+	/*
+	 |--------------------------------------------------------------------------
+	 | API Versi 2.1 (Ubah query untuk create or update EBCC untuk fix issue duplicate)
+	 |--------------------------------------------------------------------------
+	 */
+	//tambah body kafka untuk keperluan joran
+	app.post('/api/v2.2/ebcc/validation/header', Middleware.v_2_0.VerifyToken, Controllers.v_2_2.EBCCValidationHeader.create);
+	app.post('/api/v2.2/ebcc/validation/detail', Middleware.v_2_0.VerifyToken, Controllers.v_2_2.EBCCValidationDetail.create);
 
 	/*
 	 |--------------------------------------------------------------------------
